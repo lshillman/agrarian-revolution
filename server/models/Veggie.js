@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const User = require('./User');
+const Request = require('./Request');
 
 const veggieSchema = new Schema ({
     type: {
@@ -29,8 +30,8 @@ const veggieSchema = new Schema ({
     description: {
         type: String,
         maxLength: 280
-    }
-    
+    },
+    requests: [Request]
 });
 
 const Veggie = model('Veggie', veggieSchema)
