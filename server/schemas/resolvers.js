@@ -2,10 +2,80 @@ const { User, Veggie, Request } = require('../models');
 
 const resolvers = {
     Query: {
-
+        user: async (parent, { _id }) => {
+            return User.find({ _id: _id });
+        },
+        veggies: async () => {
+            return Veggie.find({});
+        },
+        veggie: async (parent, { _id }) => {
+            return Veggie.find({ _id: _id });
+        },
+        received_requests: async (parent, { _id }) => {
+            return Request.find({ veggie: _id });
+        },
+        sent_requests: async (parent, { _id }) => {
+            return Request.find({ requestor: _id });
+        }
     },
     Mutation: {
-
+        createUser: async (parent, args) => {
+            const user = await User.create(args);
+            return user;
+        },
+        createVeggie: async (parent, args) => {
+            const veggie = await Veggie.create(args);
+            return veggie;
+        },
+        createRequest: async (parent, args) => {
+            const request = await Request.create(args);
+            return request;
+        },
+        createResponse: async (parent, args) => {
+            const request = await Request.findOneAndUpdate(
+                { _id: args._id },
+                { responses: responses.push(args) },
+                { new: true }
+            );
+            return request;
+        },
+        updateUser: async (parent, args) => {
+            const user = await User.findOneAndUpdate(
+                { _id: args._id },
+                { args },
+                { new: true }
+            );
+            return user;
+        },
+        updateVeggie: async (parent, args) => {
+            const veggie = await Veggie.findOneAndUpdate(
+                { _id: args._id },
+                { args },
+                { new: true }
+            );
+            return veggie;
+        },
+        deleteVeggie: async (parent, { _id }) => {
+            const veggie = await Veggie.findOneAndDelete(
+                { _id },
+                { new: true }
+            );
+            return veggie;
+        },
+        deleteUser: async (parent, { _id }) => {
+            const user = await User.findOneAndDelete(
+                { _id },
+                { new: true }
+            );
+            return user;
+        },
+        deleteRequest: async (parent, { _id }) => {
+            const request = await Request.findOneAndDelete(
+                { _id },
+                { new: true }
+            );
+            return request;
+        }
     }
 };
 

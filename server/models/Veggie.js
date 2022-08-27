@@ -8,11 +8,16 @@ const veggieSchema = new Schema ({
         required: true
     },
     owner: {
-        type: User
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     postedDate: {
         type: Date,
         default: Date.now()
+    },
+    expiredAt: {
+        type: Date,
+        default: postedDate + 604800
     },
     location: {
         type: String,
@@ -25,7 +30,9 @@ const veggieSchema = new Schema ({
         type: String
     },
     quantity: {
-        type: Number
+        type: Number,
+        require: true,
+        default: 1
     },
     description: {
         type: String,
