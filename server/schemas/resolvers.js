@@ -25,20 +25,21 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { username }) => {
-            return User.find({ username: username }).populate('veggies');
+            return User.find({ username: username }).populate('veggies').populate('requests');
         },
         veggies: async () => {
             return Veggie.find({});
         },
         veggie: async (parent, { _id }) => {
             return Veggie.find({ _id: _id }).populate('requests');
-        },
-        received_requests: async (parent, { _id }) => {
-            return Request.find({ veggie: _id }).populate('requestor');
-        },
-        sent_requests: async (parent, { _id }) => {
-            return Request.find({ requestor: _id });
         }
+        // received_requests: async (parent, { _id }) => {
+        //     return Request.find({ veggie: _id }).populate('requestor');
+        // },
+        // sent_requests: async (parent, { _id }) => {
+        //     return Request.find({ requestor: _id });
+        // }
+       
     },
     Mutation: {
         createUser: async (parent, args) => {
