@@ -25,10 +25,16 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { username }) => {
-            return User.find({ username: username }).populate('veggies').populate('requests');
+            return User.find({ username: username }).populate('veggies').populate({
+                path: 'veggies',
+                populate: 'requests'
+            });
         },
         veggies: async () => {
-            return Veggie.find({});
+            return Veggie.find({}).populate('requests').populate({
+                path: 'requests',
+                populate: 'requestor'
+            });
         },
         veggie: async (parent, { _id }) => {
             return Veggie.find({ _id: _id }).populate('requests');
@@ -48,6 +54,10 @@ const resolvers = {
         },
         createVeggie: async (parent, args) => {
             const veggie = await Veggie.create(args);
+            await User.findOneAndUpdate(
+                {_id: veggie.owner},
+                { $addToSet: { veggies: veggie._id }}
+            )
             return veggie;
         },
         createRequest: async (parent, args) => {
