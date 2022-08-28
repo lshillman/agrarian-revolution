@@ -39,11 +39,12 @@ const typeDefs = gql`
         veggie: Veggie!
         requestor: User
         content: String!
+        unreadMessages: Boolean
         responses: [Response]
     }
 
     type Query {
-        user(username: String): [User]
+        user(_id: String): [User]
         veggies: [Veggie]
         veggie(_id: String): [Veggie]
 

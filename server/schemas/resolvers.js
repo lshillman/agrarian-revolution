@@ -24,8 +24,8 @@ const resolverMap = {
 
 const resolvers = {
     Query: {
-        user: async (parent, { username }) => {
-            return User.find({ username: username }).populate('veggies').populate({
+        user: async (parent, { _id }) => {
+            return User.find({ _id: _id }).populate('veggies').populate({
                 path: 'veggies',
                 populate: 'requests'
             });
@@ -77,8 +77,10 @@ const resolvers = {
         createResponse: async (parent, {_id, content, sender}) => {
             const request = await Request.findOneAndUpdate(
                 { _id: _id },
-                { $addToSet: { responses: { content: content, sender: sender } } },
-                { new: true }
+                { $addToSet: { responses: { content: content, sender: sender } },
+                  $set: {unreadMessages: true}
+                 },
+                { new: true },
             );
             return request;
         },
