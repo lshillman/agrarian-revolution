@@ -58,10 +58,10 @@ const resolvers = {
             )
             return request;
         },
-        createResponse: async (parent, args) => {
+        createResponse: async (parent, {_id, content, sender}) => {
             const request = await Request.findOneAndUpdate(
-                { _id: args._id },
-                { responses: responses.push(args) },
+                { _id: _id },
+                { $addToSet: { responses: { content: content, sender: sender } } },
                 { new: true }
             );
             return request;
@@ -69,7 +69,7 @@ const resolvers = {
         updateUser: async (parent, args) => {
             const user = await User.findOneAndUpdate(
                 { _id: args._id },
-                { args },
+                { $set: args },
                 { new: true }
             );
             return user;
@@ -77,7 +77,7 @@ const resolvers = {
         updateVeggie: async (parent, args) => {
             const veggie = await Veggie.findOneAndUpdate(
                 { _id: args._id },
-                { args },
+                { $set: args },
                 { new: true }
             );
             return veggie;

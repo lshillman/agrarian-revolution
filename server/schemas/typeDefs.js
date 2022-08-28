@@ -27,12 +27,18 @@ const typeDefs = gql`
         requests: [Request]
     }
 
+    type Response {
+        content: String!,
+        sender: User!
+        timestamp: Date
+    }
+
     type Request {
         _id: ID!
         veggie: Veggie!
         requestor: User
         content: String!
-        responses: [String]
+        responses: [Response]
     }
 
     type Query {
@@ -47,7 +53,7 @@ const typeDefs = gql`
         createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): User
         createVeggie(type: String!, owner: String!, location: String!,coordinates: [Float]!, photo: String, quantity: Int!, description: String): Veggie
         createRequest(veggie: String, requestor: String, content: String): Request
-        createResponse(content: String, sender: String): Request
+        createResponse(_id: String, content: String, sender: String): Request
         updateUser(_id: String, email: String, password: String, location: String, coordinates: [Float]): User
         updateVeggie(type: String, owner: String, coordinates: [Float], photo: String, quantity: Int, description: String): Veggie
         deleteVeggie(_id: String): Veggie
