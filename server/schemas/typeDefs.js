@@ -1,10 +1,14 @@
 const { gql } = require('apollo-server-express');
+const {resolverMap} = require('./resolvers');
 
 const typeDefs = gql`
+    scalar Date
+
     type User {
         _id: ID!
         username: String!
         email: String!
+        password: String!
         location: String!
         coordinates: [Float]
         veggies: [Veggie]
@@ -24,18 +28,15 @@ const typeDefs = gql`
     }
 
     type Request {
+        _id: ID!
         veggie: Veggie!
-        requestor: 
+        requestor: User
         content: String!
-        responses: [{
-            content: String!
-            sender: User!
-            timestamp: Date!
-        }]
+        responses: [String]
     }
 
     type Query {
-        user(_id: String): [User]
+        user(username: String): [User]
         veggies: [Veggie]
         veggie(_id: String): Veggie
         received_requests(_id: String): [Request]
@@ -43,15 +44,15 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Number]!)
-        createVeggie(type: String!, owner: Schema.Types.ObjectId!, coordinates: [Number]!, photo: String, quantity: Number!, description: String)
-        createRequest(veggie: Schema.Types.ObjectId, requestor: Schema.Types.ObjectId, content: String)
-        createResponse(content: String, sender: Schema.Types.ObjectId)
-        updateUser(email: String, password: String, location: String, coordinates: [Number])
-        updateVeggie(type: String, owner: Schema.Types.ObjectId, coordinates: [Number], photo: String, quantity: Number, description: String)
-        deleteVeggie(_id: Schema.Types.ObjectId)
-        deleteUser(_id: Schema.Types.ObjectId)
-        deleteRequest(_id: Schema.Types.ObjectId)
+        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): User
+        createVeggie(type: String!, owner: String!, location: String!,coordinates: [Float]!, photo: String, quantity: Int!, description: String): Veggie
+        createRequest(veggie: String, requestor: String, content: String): Request
+        createResponse(content: String, sender: String): Request
+        updateUser(_id: String, email: String, password: String, location: String, coordinates: [Float]): User
+        updateVeggie(type: String, owner: String, coordinates: [Float], photo: String, quantity: Int, description: String): Veggie
+        deleteVeggie(_id: String): Veggie
+        deleteUser(_id: String): User
+        deleteRequest(_id: String): Request
     }
 
 `;

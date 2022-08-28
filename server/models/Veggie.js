@@ -15,10 +15,10 @@ const veggieSchema = new Schema ({
         type: Date,
         default: Date.now()
     },
-    expiredAt: {
-        type: Date,
-        default: postedDate + 604800
-    },
+    // expiredAt: {
+    //     type: Date,
+    //     default: this.postedDate + 604800
+    // },
     location: {
         type: String,
         required: true
@@ -38,7 +38,12 @@ const veggieSchema = new Schema ({
         type: String,
         maxLength: 280
     },
-    requests: [Request]
+    requests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Request'
+        }
+    ]
 });
 
 const Veggie = model('Veggie', veggieSchema)

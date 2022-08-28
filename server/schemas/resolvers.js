@@ -1,9 +1,31 @@
 const { User, Veggie, Request } = require('../models');
 
+const { GraphQLScalarType } = require('graphql');
+const { Kind } = require('graphql/language');
+
+const resolverMap = {
+    Date: new GraphQLScalarType({
+        name: 'Date',
+        description: 'Date custom scalar type',
+        parseValue(value) {
+            return new Date(value); // value from the client
+        },
+        serialize(value) {
+            return value.getTime(); // value sent to the client
+        },
+        parseLiteral(ast) {
+            if (ast.kind === Kind.INT) {
+            return parseInt(ast.value, 10); // ast value is always in string format
+            }
+            return null;
+        },
+    })
+}
+
 const resolvers = {
     Query: {
-        user: async (parent, { _id }) => {
-            return User.find({ _id: _id });
+        user: async (parent, { username }) => {
+            return User.find({ username: username });
         },
         veggies: async () => {
             return Veggie.find({});
@@ -29,6 +51,11 @@ const resolvers = {
         },
         createRequest: async (parent, args) => {
             const request = await Request.create(args);
+            const veggie = await Veggie.findOneAndUpdate(
+                {_id: args.veggie},
+                { $addToSet: { requests: request._id  } },
+                { new: true }
+            )
             return request;
         },
         createResponse: async (parent, args) => {
@@ -79,4 +106,4 @@ const resolvers = {
     }
 };
 
-module.exports = resolvers;
+module.exports = {resolvers, resolverMap};
