@@ -24,8 +24,8 @@ const resolverMap = {
 
 const resolvers = {
     Query: {
-        user: async (parent, { username }) => {
-            return User.find({ username: username }).populate('veggies').populate({
+        user: async (parent, { _id }) => {
+            return User.find({ _id: _id }).populate('veggies').populate({
                 path: 'veggies',
                 populate: 'requests'
             });

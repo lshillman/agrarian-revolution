@@ -20,7 +20,7 @@ const requestSchema = new Schema({
     },
     unreadMessages: {
         type: Boolean,
-        default: false
+        default: true
     },
     responses: [
         {
