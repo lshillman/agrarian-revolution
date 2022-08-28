@@ -27,6 +27,12 @@ const userSchema = new Schema ({
             type: Schema.Types.ObjectId,
             ref: 'Veggie'
         }
+    ],
+    requests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Request'
+        }
     ]
 })
 

@@ -31,7 +31,7 @@ const resolvers = {
             return Veggie.find({});
         },
         veggie: async (parent, { _id }) => {
-            return Veggie.find({ _id: _id });
+            return Veggie.find({ _id: _id }).populate('requests');
         },
         received_requests: async (parent, { _id }) => {
             return Request.find({ veggie: _id });
