@@ -1,4 +1,4 @@
-const { User, Veggie, Request } = require('../models');
+const { User, Veggie, Request} = require('../models');
 
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
@@ -25,20 +25,27 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { username }) => {
-            return User.find({ username: username }).populate('veggies');
+            return User.find({ username: username }).populate('veggies').populate({
+                path: 'veggies',
+                populate: 'requests'
+            });
         },
         veggies: async () => {
-            return Veggie.find({});
+            return Veggie.find({}).populate('requests').populate({
+                path: 'requests',
+                populate: 'requestor'
+            });
         },
         veggie: async (parent, { _id }) => {
-            return Veggie.find({ _id: _id }, {options: {strictPopulate: false}}).populate('requests');
-        },
-        received_requests: async (parent, { _id }) => {
-            return Request.find({ veggie: _id }).populate('requestor');
-        },
-        sent_requests: async (parent, { _id }) => {
-            return Request.find({ requestor: _id });
+            return Veggie.find({ _id: _id }).populate('requests');
         }
+        // received_requests: async (parent, { _id }) => {
+        //     return Request.find({ veggie: _id }).populate('requestor');
+        // },
+        // sent_requests: async (parent, { _id }) => {
+        //     return Request.find({ requestor: _id });
+        // }
+       
     },
     Mutation: {
         createUser: async (parent, args) => {
@@ -47,6 +54,10 @@ const resolvers = {
         },
         createVeggie: async (parent, args) => {
             const veggie = await Veggie.create(args);
+            await User.findOneAndUpdate(
+                {_id: veggie.owner},
+                { $addToSet: { veggies: veggie._id }}
+            )
             return veggie;
         },
         createRequest: async (parent, args) => {
@@ -55,6 +66,11 @@ const resolvers = {
                 {_id: args.veggie},
                 { $addToSet: { requests: request._id  } },
                 { new: true }
+            )
+ 
+            const userToUpdate = await User.findOneAndUpdate(
+                {_id: request.requestor._id},
+                { $addToSet: { requests: request._id}},
             )
             return request;
         },
