@@ -12,6 +12,7 @@ const typeDefs = gql`
         location: String!
         coordinates: [Float]
         veggies: [Veggie]
+        requests: [Request]
     }
 
     type Veggie {
@@ -44,7 +45,7 @@ const typeDefs = gql`
     type Query {
         user(username: String): [User]
         veggies: [Veggie]
-        veggie(_id: String): Veggie
+        veggie(_id: String): [Veggie]
         received_requests(_id: String): [Request]
         sent_requests(_id: String): [Request]
     }
