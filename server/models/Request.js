@@ -1,12 +1,14 @@
 const { Schema, model } = require('mongoose');
 const User = require('./User');
-const Veggie = require('./Veggie');
+// const Veggie = require('./Veggie');
 
 
 const requestSchema = new Schema({
     veggie: {
-        type: Veggie,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: 'Veggie'
+        // type: Veggie,
+        // required: true
     },
     requestor: {
         type: Schema.Types.ObjectId,
@@ -23,7 +25,8 @@ const requestSchema = new Schema({
                 required: true
             },
             sender: {
-                type: User,
+                type: Schema.Types.ObjectId,
+                ref: 'User',
                 required: true
             },
             timestamp: {

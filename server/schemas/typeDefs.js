@@ -1,10 +1,14 @@
 const { gql } = require('apollo-server-express');
+const {resolverMap} = require('./resolvers');
 
 const typeDefs = gql`
+    scalar Date
+
     type User {
         _id: ID!
         username: String!
         email: String!
+        password: String!
         location: String!
         coordinates: [Float]
         veggies: [Veggie]
@@ -23,19 +27,22 @@ const typeDefs = gql`
         requests: [Request]
     }
 
+    type Response {
+        content: String!,
+        sender: User!
+        timestamp: Date
+    }
+
     type Request {
+        _id: ID!
         veggie: Veggie!
-        requestor: 
+        requestor: User
         content: String!
-        responses: [{
-            content: String!
-            sender: User!
-            timestamp: Date!
-        }]
+        responses: [Response]
     }
 
     type Query {
-        user(_id: String): [User]
+        user(username: String): [User]
         veggies: [Veggie]
         veggie(_id: String): Veggie
         received_requests(_id: String): [Request]
@@ -43,15 +50,15 @@ const typeDefs = gql`
     }
 
     type Mutation {
-        createUser
-        createVeggie
-        createRequest
-        createResponse
-        updateUser
-        updateVeggie
-        deleteVeggie
-        deleteUser
-        deleteRequest
+        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): User
+        createVeggie(type: String!, owner: String!, location: String!,coordinates: [Float]!, photo: String, quantity: Int!, description: String): Veggie
+        createRequest(veggie: String, requestor: String, content: String): Request
+        createResponse(_id: String, content: String, sender: String): Request
+        updateUser(_id: String, email: String, password: String, location: String, coordinates: [Float]): User
+        updateVeggie(type: String, owner: String, coordinates: [Float], photo: String, quantity: Int, description: String): Veggie
+        deleteVeggie(_id: String): Veggie
+        deleteUser(_id: String): User
+        deleteRequest(_id: String): Request
     }
 
 `;

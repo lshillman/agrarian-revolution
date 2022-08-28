@@ -8,12 +8,17 @@ const veggieSchema = new Schema ({
         required: true
     },
     owner: {
-        type: User
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     postedDate: {
         type: Date,
         default: Date.now()
     },
+    // expiredAt: {
+    //     type: Date,
+    //     default: this.postedDate + 604800
+    // },
     location: {
         type: String,
         required: true
@@ -25,13 +30,20 @@ const veggieSchema = new Schema ({
         type: String
     },
     quantity: {
-        type: Number
+        type: Number,
+        require: true,
+        default: 1
     },
     description: {
         type: String,
         maxLength: 280
     },
-    requests: [Request]
+    requests: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Request'
+        }
+    ]
 });
 
 const Veggie = model('Veggie', veggieSchema)

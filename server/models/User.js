@@ -22,7 +22,12 @@ const userSchema = new Schema ({
     coordinates: {
         type: [Number]
     },
-    veggies: [Veggie]
+    veggies: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Veggie'
+        }
+    ]
 })
 
 const User = model('User', userSchema)
