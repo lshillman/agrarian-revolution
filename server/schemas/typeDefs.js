@@ -39,6 +39,7 @@ const typeDefs = gql`
         veggie: Veggie!
         requestor: User
         content: String!
+        unreadMessages: Boolean
         responses: [Response]
     }
 

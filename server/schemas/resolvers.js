@@ -77,8 +77,10 @@ const resolvers = {
         createResponse: async (parent, {_id, content, sender}) => {
             const request = await Request.findOneAndUpdate(
                 { _id: _id },
-                { $addToSet: { responses: { content: content, sender: sender } } },
-                { new: true }
+                { $addToSet: { responses: { content: content, sender: sender } },
+                  $set: {unreadMessages: true}
+                 },
+                { new: true },
             );
             return request;
         },

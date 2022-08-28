@@ -18,6 +18,10 @@ const requestSchema = new Schema({
         type: String,
         maxLength: 280
     },
+    unreadMessages: {
+        type: Boolean,
+        default: false
+    },
     responses: [
         {
             content: {
