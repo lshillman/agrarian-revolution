@@ -1,4 +1,4 @@
-const { User, Veggie, Request } = require('../models');
+const { User, Veggie, Request} = require('../models');
 
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
@@ -31,7 +31,7 @@ const resolvers = {
             return Veggie.find({});
         },
         veggie: async (parent, { _id }) => {
-            return Veggie.find({ _id: _id }, {options: {strictPopulate: false}}).populate('requests');
+            return Veggie.find({ _id: _id }).populate('requests');
         },
         received_requests: async (parent, { _id }) => {
             return Request.find({ veggie: _id }).populate('requestor');
@@ -55,6 +55,11 @@ const resolvers = {
                 {_id: args.veggie},
                 { $addToSet: { requests: request._id  } },
                 { new: true }
+            )
+ 
+            const userToUpdate = await User.findOneAndUpdate(
+                {_id: request.requestor._id},
+                { $addToSet: { requests: request._id}},
             )
             return request;
         },
