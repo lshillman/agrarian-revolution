@@ -25,9 +25,13 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { _id }) => {
-            return User.find({ _id: _id }).populate('veggies').populate({
+            console.log("I'm in the user resolver");
+            return await User.find({ _id: _id }).populate({
                 path: 'veggies',
-                populate: 'requests'
+                populate: {
+                    path: 'requests',
+                    populate: 'requestor'
+                }
             });
         },
         veggies: async () => {
@@ -38,14 +42,10 @@ const resolvers = {
         },
         veggie: async (parent, { _id }) => {
             return Veggie.find({ _id: _id }).populate('requests');
-        }
-        // received_requests: async (parent, { _id }) => {
-        //     return Request.find({ veggie: _id }).populate('requestor');
-        // },
-        // sent_requests: async (parent, { _id }) => {
-        //     return Request.find({ requestor: _id });
-        // }
-       
+        },
+        requests: async (parent) => {
+            return Request.find({veggie: parent._id}).populate('requestor');
+        }       
     },
     Mutation: {
         createUser: async (parent, args) => {
