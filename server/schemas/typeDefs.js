@@ -47,7 +47,7 @@ const typeDefs = gql`
         user(_id: String): [User]
         veggies: [Veggie]
         veggie(_id: String): [Veggie]
-
+        requests(_id: String): [Request]
     }
 
     type Mutation {
