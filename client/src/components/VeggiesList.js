@@ -1,7 +1,7 @@
 import React from "react"
 
 const VeggiesList = ({ veggies }) => {
-    if (!veggies || !veggies.length) {
+    if (!veggies?.length) {
         return <h3>No veggies yet</h3>;
     }
 
