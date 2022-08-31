@@ -12,7 +12,7 @@ const typeDefs = gql`
         location: String!
         coordinates: [Float]
         veggies: [Veggie]
-        requests: [Request]
+        sent_requests: [Request]
     }
 
     type Veggie {
@@ -20,6 +20,7 @@ const typeDefs = gql`
         type: String!
         owner: User!
         postedDate: Date
+        expiredAt: Date
         location: String!
         coordinates: [Float]
         quantity: Int

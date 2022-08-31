@@ -25,14 +25,13 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { _id }) => {
-            console.log("I'm in the user resolver");
             return await User.find({ _id: _id }).populate({
                 path: 'veggies',
                 populate: {
                     path: 'requests',
                     populate: 'requestor'
                 }
-            });
+            }).populate('sent_requests');
         },
         veggies: async () => {
             return Veggie.find({}).populate('requests').populate({
@@ -70,7 +69,7 @@ const resolvers = {
  
             const userToUpdate = await User.findOneAndUpdate(
                 {_id: request.requestor._id},
-                { $addToSet: { requests: request._id}},
+                { $addToSet: { sent_requests: request._id}},
             )
             return request;
         },
@@ -125,3 +124,4 @@ const resolvers = {
 };
 
 module.exports = {resolvers, resolverMap};
+// module.exports = resolvers;

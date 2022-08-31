@@ -28,7 +28,7 @@ const userSchema = new Schema ({
             ref: 'Veggie'
         }
     ],
-    requests: [
+    sent_requests: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Request'
