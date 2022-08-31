@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
+// import { Form, Button, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { CREATE_USER } from "../utils/mutations"
-import { useMutation } from "@apollo/react-hooks"
+import { useMutation } from "@apollo/client"
 import Auth from '../utils/auth';
 
-const signupForm = () => {
+const SignupForm = () => {
     const [formState, setFormState] = useState({
         username: '',
         email: '',
         password: '',
         street: '',
         crossStreet: '',
-        latitude: '37.93301',
-        longitude: '-122.31681'
+        latitude: 37.93301,
+        longitude: -122.31681
     });
     const [createUser, { error, data }] = useMutation(CREATE_USER);
 
     // update state based on form input changes
     const handleChange = (event) => {
-        const { username, value } = event.target;
+        const { name, value } = event.target;
 
         setFormState({
             ...formState,
-            [username]: value,
+            [name]: value
         });
     };
 
@@ -31,10 +31,13 @@ const signupForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(formState);
+        let variables = { ...formState, coordinates: [formState.latitude,formState.longitude], location: `${formState.street} & ${formState.crossStreet}` }
+        console.log(variables)
 
         try {
             const { data } = await createUser({
-                variables: { ...formState },
+               variables: { ...formState, coordinates: [formState.latitude,formState.longitude], location: `${formState.street} & ${formState.crossStreet}` },
+
             });
 
             Auth.login(data.createUser.token);
@@ -62,7 +65,7 @@ const signupForm = () => {
                                     placeholder="Your username"
                                     name="username"
                                     type="text"
-                                    value={formState.name}
+                                    value={formState.username}
                                     onChange={handleChange}
                                 />
                                 <input
@@ -118,8 +121,7 @@ const signupForm = () => {
             </div>
         </main>
 
-
     )
 }
 
-export default signupForm;
+export default SignupForm;
