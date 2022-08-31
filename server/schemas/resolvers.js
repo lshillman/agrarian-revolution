@@ -70,7 +70,7 @@ const resolvers = {
  
             const userToUpdate = await User.findOneAndUpdate(
                 {_id: request.requestor._id},
-                { $addToSet: { requests: request._id}},
+                { $addToSet: { sent_requests: request._id}},
             )
             return request;
         },

@@ -12,7 +12,7 @@ const typeDefs = gql`
         location: String!
         coordinates: [Float]
         veggies: [Veggie]
-        requests: [Request]
+        sent_requests: [Request]
     }
 
     type Veggie {
