@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 // import { getAllMatchups } from '../utils/api';
 
-const Home = () => {
+const Search = () => {
   return (
     <div>
       <h1>Hello</h1>
@@ -10,4 +10,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Search;
