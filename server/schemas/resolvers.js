@@ -125,3 +125,4 @@ const resolvers = {
 };
 
 module.exports = {resolvers, resolverMap};
+// module.exports = resolvers;

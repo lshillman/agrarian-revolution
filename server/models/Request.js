@@ -22,6 +22,10 @@ const requestSchema = new Schema({
         type: Boolean,
         default: true
     },
+    timestamp: {
+        type: Date,
+        default: Date.now()
+    },
     responses: [
         {
             content: {
