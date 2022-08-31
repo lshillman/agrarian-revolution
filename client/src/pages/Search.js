@@ -21,12 +21,12 @@ const Search = () => {
           </div>
 
           <div style={{ flexBasis: "80%"}}>
-            <MapContainer center={[51.505, -0.09]} zoom={13} style={{ height: "500px", width: "" }}>
+            <MapContainer center={[40.86776, -124.08828]} zoom={13} style={{ height: "500px" }}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={[51.505, -0.09]}>
+              <Marker position={[40.86776, -124.08828]}>
                 <Popup>
                   <button>idk button!</button>
                 </Popup>
