@@ -1,5 +1,5 @@
 const { gql } = require('apollo-server-express');
-const {resolverMap} = require('./resolvers');
+const { resolverMap } = require('./resolvers');
 
 const typeDefs = gql`
     scalar Date
@@ -44,15 +44,22 @@ const typeDefs = gql`
         responses: [Response]
     }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
     type Query {
         user(_id: String): [User]
         veggies: [Veggie]
         veggie(_id: String): [Veggie]
         requests(_id: String): [Request]
+        me: User
     }
 
     type Mutation {
-        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): User
+        login(email: String!, password: String!): Auth
+        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): Auth
         createVeggie(type: String!, owner: String!, location: String!,coordinates: [Float]!, photo: String, quantity: Int!, description: String): Veggie
         createRequest(veggie: String, requestor: String, content: String): Request
         createResponse(_id: String, content: String, sender: String): Request
