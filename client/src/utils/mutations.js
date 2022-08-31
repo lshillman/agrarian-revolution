@@ -1,25 +1,16 @@
-// import { gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-// export const ADD_MATCHUP = gql`
-// mutation addMatchup($tech1: String!, $tech2: String!) {
-//     addMatchup(tech1: $tech1, tech2: $tech2) {
-//         _id
-//         tech1
-//         tech2
-//         tech1_votes
-//         tech2_votes
-//     }
-// }
-// `;
 
-// export const ADD_VOTE = gql`
-// mutation addVote($tech1_votes: Int!, $tech2_votes: Int!) {
-//     addVote(tech1_votes: $tech1_votes, tech2_votes: $tech2_votes) {
-//         _id
-//         tech1
-//         tech2
-//         tech1_votes
-//         tech2_votes
-//     }
-// }
-// `;
+
+export const CREATE_USER = gql`
+mutation CreateUser($email: String!, $password: String!, $location: String!, $coordinates: [Float]!, $username: String!) {
+    createUser(email: $email, password: $password, location: $location, coordinates: $coordinates, username: $username) {
+      username
+      email
+      password
+      location
+      coordinates
+      _id
+    }
+  }
+`
