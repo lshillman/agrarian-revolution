@@ -30,16 +30,11 @@ const SignupForm = () => {
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
-        let variables = { ...formState, coordinates: [formState.latitude,formState.longitude], location: `${formState.street} & ${formState.crossStreet}` }
-        console.log(variables)
 
         try {
-            const { data } = await createUser({
+            const {data} = await createUser({
                variables: { ...formState, coordinates: [formState.latitude,formState.longitude], location: `${formState.street} & ${formState.crossStreet}` },
-
             });
-
             Auth.login(data.createUser.token);
         } catch (e) {
             console.error(e);

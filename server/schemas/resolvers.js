@@ -59,11 +59,9 @@ const resolvers = {
     },
     Mutation: {
         createUser: async (parent, args) => {
-            console.log('im in create user')
             const user = await User.create(args);
-            const token = signToken(user);
-            
-            return user;
+            const token = await signToken(user);
+            return {user, token};
         },
         createVeggie: async (parent, args) => {
             const veggie = await Veggie.create(args);

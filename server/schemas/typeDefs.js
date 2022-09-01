@@ -44,10 +44,10 @@ const typeDefs = gql`
         responses: [Response]
     }
 
-  type Auth {
-    token: ID!
-    user: User
-  }
+    type Auth {
+        token: ID!
+        user: User
+    }
 
     type Query {
         user(_id: String): [User]
