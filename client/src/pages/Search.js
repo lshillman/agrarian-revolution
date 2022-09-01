@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 // import { Link } from 'react-router-dom';
 import VeggiesList from '../components/VeggiesList';
 import VeggiePopup from '../components/VeggiePopup';
+import AddVeggieForm from '../components/AddVeggieForm';
 import { QUERY_VEGGIES } from '../utils/queries';
 
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
@@ -29,7 +30,7 @@ const Search = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {console.log(veggies[veggies.length - 1].coordinates)}
+              
               {veggies.map((veggie) => (
                 <>
                   <Marker position={veggie.coordinates} icon={icons[veggie.type]}>
@@ -39,6 +40,8 @@ const Search = () => {
               ))}
             </MapContainer>
           </div>
+
+          <AddVeggieForm />
         </>
       )}
     </main>
