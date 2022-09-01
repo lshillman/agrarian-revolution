@@ -19,24 +19,24 @@ const Search = () => {
         <div>Loading...</div>
       ) : (
         <>
-          <div style={{ flexBasis: "20%"}}>
+          <div style={{ flexBasis: "20%" }}>
             <VeggiesList veggies={veggies} />
           </div>
 
-          <div style={{ flexBasis: "80%"}}>
+          <div style={{ flexBasis: "80%" }}>
             <MapContainer center={[37.7749, -122.4194]} zoom={13} style={{ height: "500px" }}>
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {console.log(veggies[veggies.length-1].coordinates)}
+              {console.log(veggies[veggies.length - 1].coordinates)}
               {veggies.map((veggie) => (
                 <>
-              <Marker position={veggie.coordinates} icon={icons[veggie.type]}>
-                <VeggiePopup veggie={veggie} />
-              </Marker>
-              </>
-            ))}
+                  <Marker position={veggie.coordinates} icon={icons[veggie.type]}>
+                    <VeggiePopup veggie={veggie} />
+                  </Marker>
+                </>
+              ))}
             </MapContainer>
           </div>
         </>
