@@ -59,7 +59,7 @@ const typeDefs = gql`
 
     type Mutation {
         login(email: String!, password: String!): Auth
-        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]!): Auth
+        createUser(username: String!, email: String!, password: String!, location: String!, coordinates: [Float]): Auth
         createVeggie(type: String!, owner: String!, location: String!,coordinates: [Float]!, photo: String, quantity: Int!, description: String): Veggie
         createRequest(veggie: String, requestor: String, content: String): Request
         createResponse(_id: String, content: String, sender: String): Request
