@@ -1,5 +1,13 @@
 import { gql } from '@apollo/client';
 
+export const CREATE_VEGGIE = gql`
+mutation createVeggie($type: String!, $owner: String!, $location: String!, $quantity: Int!, $description: String, $photo: String, $coordinates: [Float]) {
+  createVeggie(type: $type, owner: $owner, location: $location, quantity: $quantity, description: $description, photo: $photo, coordinates: $coordinates){
+      _id
+      type
+  }
+}
+`
 
 
 export const CREATE_USER = gql`
