@@ -26,11 +26,15 @@ const Search = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={[40.86776, -124.08828]}>
+              {console.log(veggies[veggies.length-1].coordinates)}
+              {veggies.map((veggie) => (
+              <Marker position={veggie.coordinates}>
                 <Popup>
-                  <button>idk button!</button>
+                  <h4>{veggie.type}</h4>
+                  <button>Request</button>
                 </Popup>
               </Marker>
+            ))}
             </MapContainer>
           </div>
         </>
