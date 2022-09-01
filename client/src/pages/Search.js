@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 // import { Link } from 'react-router-dom';
 import VeggiesList from '../components/VeggiesList';
+import VeggiePopup from '../components/VeggiePopup';
 import { QUERY_VEGGIES } from '../utils/queries';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -32,10 +33,7 @@ const Search = () => {
               {veggies.map((veggie) => (
                 <>
               <Marker position={veggie.coordinates} icon={icons[veggie.type]}>
-                <Popup>
-                  <h4>{veggie.type}</h4>
-                  <button>Request</button>
-                </Popup>
+                <VeggiePopup veggie={veggie} />
               </Marker>
               </>
             ))}
