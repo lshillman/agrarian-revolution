@@ -12,8 +12,7 @@ const SignupForm = () => {
         password: '',
         street: '',
         crossStreet: '',
-        latitude: 37.93301,
-        longitude: -122.31681
+        zipcode: ''
     });
     const [createUser, { error, data }] = useMutation(CREATE_USER);
 
@@ -32,9 +31,12 @@ const SignupForm = () => {
         event.preventDefault();
 
         try {
-            const {data} = await createUser({
-               variables: { ...formState, coordinates: [formState.latitude,formState.longitude], location: `${formState.street} & ${formState.crossStreet}` },
+            const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
+
+            const { data } = await createUser({
+                variables: { ...formState, location },
             });
+
             Auth.login(data.createUser.token);
         } catch (e) {
             console.error(e);
@@ -93,6 +95,14 @@ const SignupForm = () => {
                                     name="crossStreet"
                                     type="text"
                                     value={formState.crossStreet}
+                                    onChange={handleChange}
+                                />
+                                <input
+                                    className="form-input"
+                                    placeholder="zip code"
+                                    name="zipcode"
+                                    type="text"
+                                    value={formState.zipcode}
                                     onChange={handleChange}
                                 />
 

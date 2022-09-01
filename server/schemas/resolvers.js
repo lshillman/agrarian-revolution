@@ -4,6 +4,7 @@ const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 
 const { signToken } = require('../utils/auth');
+const axios = require('axios');
 
 const resolverMap = {
     Date: new GraphQLScalarType({
@@ -59,9 +60,19 @@ const resolvers = {
     },
     Mutation: {
         createUser: async (parent, args) => {
-            const user = await User.create(args);
-            const token = await signToken(user);
-            return {user, token};
+            try {
+                const response = await axios.get(`https://api.geocod.io/v1.7/geocode?api_key=408c538819a6c917135611465117c73100c9b41&q=${args.location}`)
+
+                const data = await response.data;
+                const coordinates = [data.results[0].location.lat, data.results[0].location.lng];
+    
+                const user = await User.create({...args, coordinates: coordinates});
+                const token = await signToken(user);
+                return {user, token};
+
+            } catch(e) {
+                console.error(e)
+            }
         },
         createVeggie: async (parent, args) => {
             const veggie = await Veggie.create(args);

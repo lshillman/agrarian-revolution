@@ -6,6 +6,7 @@ import Requests from './pages/Requests';
 import Conversation from './pages/Conversation';
 import Profile from './pages/Profile';
 import SignupForm from './components/SignupForm';
+import LoginForm from './components/LoginForm';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -68,6 +69,10 @@ function App() {
           <Route
             path="/signup"
             element={<SignupForm />}
+          />
+          <Route
+            path="/login"
+            element={<LoginForm />}
           />
         </Routes>
 

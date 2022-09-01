@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 // import { Link } from 'react-router-dom';
 import VeggiesList from '../components/VeggiesList';
 import VeggiePopup from '../components/VeggiePopup';
 import { QUERY_VEGGIES } from '../utils/queries';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import icons from '../utils/icons';
 
 
