@@ -6,7 +6,7 @@ const AddVeggieForm = () => {
 
     const [formState, setFormState] = useState({
         type: '',
-        quantity: '',
+        quantity: 1,
         photo: '',
         description: ''
     });
@@ -29,16 +29,16 @@ const AddVeggieForm = () => {
         event.preventDefault();
 
         try {
-            const owner = '63111bb1b0d8da8b00edaa83'
+            const owner = '630bc039d898b52aed433d23'
             const location = '10th and market 94103'
             const coordinates = [37.776541, -122.417501]
 
             console.log({ ...formState, owner, location, coordinates })
             console.log(formState)
-            const { data } = await createVeggie({
+            return await createVeggie({
                 variables: { ...formState, owner, location, coordinates },
             });
-            console.log(data)
+            // console.log(data)
 
             // Auth.login(data.createUser.token);
             
@@ -101,7 +101,7 @@ const AddVeggieForm = () => {
                     className="form-input"
                     placeholder="quantity"
                     name="quantity"
-                    type="text"
+                    type="number"
                     value={formState.quantity}
                     onChange={handleChange}
                 />
