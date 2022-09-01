@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 // import { Link } from 'react-router-dom';
 import VeggiesList from '../components/VeggiesList';
+import VeggiePopup from '../components/VeggiePopup';
 import { QUERY_VEGGIES } from '../utils/queries';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { Icon } from "leaflet";
 import icons from '../utils/icons';
-
-const spinach = new Icon({
-  iconUrl: require("../utils/icons/spinach.png").default,
-  iconSize: [27, 27]
-});
 
 
 const Search = () => {
@@ -37,12 +32,8 @@ const Search = () => {
               {console.log(veggies[veggies.length-1].coordinates)}
               {veggies.map((veggie) => (
                 <>
-              {console.log(spinach)}
               <Marker position={veggie.coordinates} icon={icons[veggie.type]}>
-                <Popup>
-                  <h4>{veggie.type}</h4>
-                  <button>Request</button>
-                </Popup>
+                <VeggiePopup veggie={veggie} />
               </Marker>
               </>
             ))}
