@@ -32,7 +32,7 @@ const AddVeggieForm = () => {
             const owner = '63111bb1b0d8da8b00edaa83'
             const location = '10th and market 94103'
             const coordinates = [37.776541, -122.417501]
-            
+
             console.log({ ...formState, owner, location, coordinates })
             console.log(formState)
             const { data } = await createVeggie({
@@ -41,6 +41,7 @@ const AddVeggieForm = () => {
             console.log(data)
 
             // Auth.login(data.createUser.token);
+            
         } catch (e) {
             console.error(e);
         }
