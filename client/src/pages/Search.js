@@ -40,9 +40,11 @@ const Search = () => {
               ))}
             </MapContainer>
           </div>
-
+          
           <AddVeggieForm />
+          
         </>
+        
       )}
     </main>
   );
