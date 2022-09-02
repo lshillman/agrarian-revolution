@@ -6,7 +6,7 @@ const AddVeggieForm = () => {
 
     const [formState, setFormState] = useState({
         type: '',
-        quantity: 1,
+        quantity: '',
         photo: '',
         description: ''
     });
@@ -29,14 +29,15 @@ const AddVeggieForm = () => {
         event.preventDefault();
 
         try {
-            const owner = '630bc039d898b52aed433d23'
+            const owner = '63123e6bce2391259699b1b6'
             const location = '10th and market 94103'
             const coordinates = [37.776541, -122.417501]
+            const quantity = formState.quantity * 1
 
             console.log({ ...formState, owner, location, coordinates })
             console.log(formState)
             return await createVeggie({
-                variables: { ...formState, owner, location, coordinates },
+                variables: { ...formState, owner, location, coordinates, quantity },
             });
             // console.log(data)
 
@@ -50,6 +51,7 @@ const AddVeggieForm = () => {
 
     return (
         <>
+        
             <h1>Add a Veggie</h1>
             <form onSubmit={handleFormSubmit}>
                 <select name='type' onChange={handleChange}>
@@ -136,6 +138,7 @@ const AddVeggieForm = () => {
                     {error.message}
                 </div>
             )}
+           
         </>
     )
 }

@@ -1,0 +1,54 @@
+
+#agrirify {
+    font-family: 'Inter', sans-serif;
+    margin: 25px;
+}
+
+#agrirify a {
+    text-decoration: none;
+    color: #006723;
+}
+#header {
+    background-color: #D0F4CD;
+    height: 100px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+h1, h2, h3, h4, p {
+    font-family: 'Inter', sans-serif;
+}
+
+#nav {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#nav-links a {
+    text-decoration: none;
+    margin: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    color: #006723;
+    display: inline-block;
+
+}
+
+button {
+    background-color: #71AFDB;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+}
+
+#logout-btn, #login-btn {
+    float: right;
+    margin: 20px;
+    text-decoration: none;
+    color: white;
+    
+}
+
