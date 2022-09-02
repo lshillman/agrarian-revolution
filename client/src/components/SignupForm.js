@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { CREATE_USER } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 import Auth from '../utils/auth';
-import { useUserContext } from '../utils/UserContext';
 
 
 
@@ -18,8 +17,6 @@ const SignupForm = () => {
         zipcode: ''
     });
     const [createUser, { error, data }] = useMutation(CREATE_USER);
-    const {userInfo, setUserInfo} = useUserContext();
-    useEffect(() => {console.log(userInfo)}, [userInfo]);
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -42,13 +39,13 @@ const SignupForm = () => {
                 variables: { ...formState, location },
             });
             console.log(data.createUser.user);
-            setUserInfo({
-                _id: data.createUser.user._id,
-                username: data.createUser.user.username,
-                email: data.createUser.user.email,
-                location: data.createUser.user.location,
-                coordinates: data.createUser.user.coordinates
-            })
+
+            localStorage.setItem("_id", data.createUser.user._id);
+            localStorage.setItem("username", data.createUser.user.username);
+            localStorage.setItem("email", data.createUser.user.email);
+            localStorage.setItem("location", data.createUser.user.location);
+            localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
+
             Auth.login(data.createUser.token);
         } catch (e) {
             console.error(e);
