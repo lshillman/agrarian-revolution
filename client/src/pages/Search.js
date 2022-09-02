@@ -36,16 +36,16 @@ const Search = () => {
   const [veggieClicked, setVeggieClicked] = useState(false);
 
   const mapRef = useRef(null);
-  const markerRef = useRef(null);
+  const markerRef = useRef(new Array());
 
-  const onClickShowMarker = () => {
+  const onClickShowMarker = (veggieIndex) => {
     const map = mapRef.current
     if (!map) {
       return
     }
 
     // map.flyTo(veggie.coordinates, 13)
-    const marker = markerRef.current
+    const marker = markerRef.current[veggieIndex]
     if (marker) {
       marker.openPopup()
     }
@@ -71,7 +71,7 @@ const Search = () => {
 
               {veggies.map((veggie) => (
                 <>
-                  <Marker ref={markerRef} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
+                  <Marker ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
                     click: (e) => {
                       selectedVeggie.current = e.target.options.data;
                       setVeggieClicked(true);
