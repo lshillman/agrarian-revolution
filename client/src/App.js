@@ -11,6 +11,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@ap
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { setContext } from '@apollo/client/link/context';
+import {UserProvider} from './utils/UserContext';
 
 // const client = new ApolloClient({
 //   uri: '/graphql',
@@ -41,44 +42,45 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Header />
+      <UserProvider>
+        <Router>
+          <Header />
 
-        <Routes>
-          <Route
-            path="/"
-            element={<Search />}
-          />
-          <Route
-            path="/veggies"
-            element={<MyVeggies />}
-          />
-          <Route
-            path="/requests"
-            element={<Requests />}
-          />
-          <Route
-            path="/requests/:requestId"
-            element={<Conversation />}
-          />
-          <Route
-            path="/profile/:username"
-            element={<Profile />}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={<Search />}
+            />
+            <Route
+              path="/veggies"
+              element={<MyVeggies />}
+            />
+            <Route
+              path="/requests"
+              element={<Requests />}
+            />
+            <Route
+              path="/requests/:requestId"
+              element={<Conversation />}
+            />
+            <Route
+              path="/profile/:username"
+              element={<Profile />}
+            />
 
-          <Route
-            path="/signup"
-            element={<SignupForm />}
-          />
-          <Route
-            path="/login"
-            element={<LoginForm />}
-          />
-        </Routes>
+            <Route
+              path="/signup"
+              element={<SignupForm />}
+            />
+            <Route
+              path="/login"
+              element={<LoginForm />}
+            />
+          </Routes>
 
-        <Footer />
-      </Router>
-
+          <Footer />
+        </Router>
+      </UserProvider>
     </ApolloProvider>
   );
 }

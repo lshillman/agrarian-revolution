@@ -69,9 +69,9 @@ const Search = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
 
-              {veggies.map((veggie) => (
-                <>
-                  <Marker ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
+              {veggies.map((veggie, key) => (
+
+                  <Marker key={key} ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
                     click: (e) => {
                       selectedVeggie.current = e.target.options.data;
                       setVeggieClicked(true);
@@ -79,7 +79,7 @@ const Search = () => {
                   }}>
                     <VeggiePopup veggie={veggie} />
                   </Marker>
-                </>
+
               ))}
             </MapContainer>
           </div>
