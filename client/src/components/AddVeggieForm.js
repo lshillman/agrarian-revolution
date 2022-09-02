@@ -29,9 +29,9 @@ const AddVeggieForm = () => {
         event.preventDefault();
 
         try {
-            const owner = '63123e6bce2391259699b1b6'
-            const location = '10th and market 94103'
-            const coordinates = [37.776541, -122.417501]
+            const owner = localStorage.getItem('_id');
+            const location = localStorage.getItem('location');
+            const coordinates = JSON.parse(localStorage.getItem('coordinates'));
             const quantity = formState.quantity * 1
 
             console.log({ ...formState, owner, location, coordinates })
