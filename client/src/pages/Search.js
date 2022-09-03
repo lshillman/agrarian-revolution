@@ -5,9 +5,7 @@ import VeggiesList from '../components/VeggiesList';
 import VeggiePopup from '../components/VeggiePopup';
 import AddVeggieForm from '../components/AddVeggieForm';
 import { QUERY_VEGGIES } from '../utils/queries';
-import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
+import { Button, Modal } from 'react-bootstrap';
 
 
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
@@ -36,51 +34,76 @@ const Search = () => {
     }
   }
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false);
 
   return (
+    <>
+      <div id="top">
+        <div id="top-search">
+          <h2>Veggies Near You</h2>
+          {/* <Button><Link to="/addveggie">Post Veggie</Link></Button> */}
+          <Button onClick={() => setShowModal(true)}>
+            Post Veggie
+          </Button>
+        </div>
+      </div>
 
-    <main style={{ maxWidth: "1200px", display: "flex" }}>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <div style={{ flexBasis: "20%" }}>
-            <VeggiesList veggies={veggies} veggieClicked={veggieClicked} selectedVeggie={selectedVeggie} onClickShowMarker={onClickShowMarker} />
-          </div>
+      <Modal
+        size='lg'
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        aria-labelledby='veggie-modal'>
 
-          <div style={{ flexBasis: "80%" }}>
-            <MapContainer center={JSON.parse(localStorage.getItem("coordinates"))} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
-              {/* <LocationMarker /> */}
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+        <Modal.Header closeButton>
+          <Modal.Title>Post a Veggie</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddVeggieForm handleModalClose={() => setShowModal(false)} />
+        </Modal.Body>
 
-              {veggies.map((veggie, key) => (
+      </Modal>
 
-                  <Marker key={key} ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
-                    click: (e) => {
-                      selectedVeggie.current = e.target.options.data;
-                      setVeggieClicked(true);
-                    },
-                  }}>
-                    <VeggiePopup veggie={veggie} />
-                  </Marker>
+      <main id="search-pg" >
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <div id="map-veg" style={{ maxWidth: "1200px" }}>
+              <div id="veggie-div" style={{ flexBasis: "25%" }}>
+                <VeggiesList veggies={veggies} veggieClicked={veggieClicked} selectedVeggie={selectedVeggie} onClickShowMarker={onClickShowMarker} />
+              </div>
 
-              ))}
-            </MapContainer>
-          </div>
-          
-          <AddVeggieForm />
-          
-        </>
-        
-      )}
-    </main>
+              <div style={{ flexBasis: "75%" }}>
+                <MapContainer center={JSON.parse(localStorage.getItem("coordinates"))} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
+                  {/* <LocationMarker /> */}
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+
+                  {veggies.map((veggie, key) => (
+
+                    <Marker key={key} ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
+                      click: (e) => {
+                        selectedVeggie.current = e.target.options.data;
+                        setVeggieClicked(true);
+                      },
+                    }}>
+                      <VeggiePopup veggie={veggie} />
+                    </Marker>
+
+                  ))}
+                </MapContainer>
+              </div>
+            </div>
+
+            {/* <AddVeggieForm /> */}
+
+          </>
+
+        )}
+      </main>
+    </>
   );
 };
 
