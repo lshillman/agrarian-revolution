@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CREATE_VEGGIE } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
+import { QUERY_VEGGIES } from '../utils/queries';
+
 
 const AddVeggieForm = () => {
 
@@ -8,7 +10,7 @@ const AddVeggieForm = () => {
         type: '',
         quantity: '',
         photo: '',
-        description: ''
+        description: '',
     });
 
     const [createVeggie, { error, data }] = useMutation(CREATE_VEGGIE)
@@ -29,16 +31,17 @@ const AddVeggieForm = () => {
         event.preventDefault();
 
         try {
-            const owner = '63123e6bce2391259699b1b6'
-            const location = '10th and market 94103'
-            const coordinates = [37.776541, -122.417501]
+            const owner = localStorage.getItem('_id');
+            const location = localStorage.getItem('location');
+            const coordinates = JSON.parse(localStorage.getItem('coordinates'));
             const quantity = formState.quantity * 1
 
             console.log({ ...formState, owner, location, coordinates })
             console.log(formState)
-            return await createVeggie({
+            await createVeggie({
                 variables: { ...formState, owner, location, coordinates, quantity },
             });
+            window.location.reload();
             // console.log(data)
 
             // Auth.login(data.createUser.token);
