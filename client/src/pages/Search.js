@@ -5,6 +5,9 @@ import VeggiesList from '../components/VeggiesList';
 import VeggiePopup from '../components/VeggiePopup';
 import AddVeggieForm from '../components/AddVeggieForm';
 import { QUERY_VEGGIES } from '../utils/queries';
+import { Button, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
 
 
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
@@ -33,7 +36,13 @@ const Search = () => {
     }
   }
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
+
     <main style={{ maxWidth: "1200px", display: "flex" }}>
       {loading ? (
         <div>Loading...</div>

@@ -2,6 +2,8 @@
 #agrirify {
     font-family: 'Inter', sans-serif;
     margin: 25px;
+    margin-top: 40px;
+    font-size: 1.5rem;
 }
 
 #agrirify a {
@@ -17,13 +19,16 @@
     text-align: center;
 }
 
-h1, h2, h3, h4, p {
+h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: bold;
 }
 
 #nav {
     display: flex;
     flex-wrap: wrap;
+    font-size: 12px;
 }
 
 #nav-links a {
@@ -33,10 +38,12 @@ h1, h2, h3, h4, p {
     font-weight: bold;
     color: #006723;
     display: inline-block;
+    font-size: 16px;
+    margin-top: 40px;
 
 }
 
-button {
+button  {
     background-color: #71AFDB;
     border: none;
     padding: 10px;
@@ -44,12 +51,58 @@ button {
     color: white;
 }
 
-#logout-btn, #login-btn {
+button a {
+    text-decoration: none;
+    color: white;
+}
+
+#logout-btn, #login-btn, #signup-btn {
     float: right;
     margin: 20px;
     text-decoration: none;
     color: white;
+    margin-top: 30px;
     
+}
+
+#top-search {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 1000px;
+}
+
+#top-search button {
+    height: 40px;
+}
+
+
+#search-pg {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+
+#map-veg {
+    display: flex;
+    width: 1000px;
+
+}
+
+#top {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.veggie-list-item {
+    display: flex;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid lightgrey;
 }
 
 

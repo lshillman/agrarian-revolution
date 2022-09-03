@@ -16,7 +16,8 @@ const VeggiesList = ({ veggies, veggieClicked, selectedVeggie, onClickShowMarker
     return (
         <div>
             {veggies.map((veggie, i) => (
-                <div onClick={() => onClickShowMarker(i)} key={i}>
+
+                <div className="veggie-list-item" onClick={() => onClickShowMarker(i)} key={i}>
                     <img src={icons[veggie.type].options.iconUrl} alt="veggie icon"/>
                     {/* {veggie._id === selectedVeggie.current ? <h4 style={styles.h4}>{veggie.type}</h4> : <h4>{veggie.type}</h4>} */}
                     <h4>{veggie.type}</h4>
