@@ -22,6 +22,7 @@ export default function Header() {
             <div id="login">
             {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
             {!Auth.loggedIn() && <button id="login-btn"><Link to="/login">Login</Link></button>}
+            {!Auth.loggedIn() && <button id="signup-btn"><Link to="/signup">Signup</Link></button>}
             </div>
         </div>
     )
