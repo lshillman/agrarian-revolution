@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
+
 import Auth from '../utils/auth';
 
-const LoginForm = (props) => {
+const LoginForm = ({setUserInfo, userInfo}) => {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -23,11 +25,27 @@ const LoginForm = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
+    
     try {
       const { data } = await login({
         variables: { ...formState },
       });
 
+      // TODO: set all the user info
+      // setUserInfo({
+      //   _id: data.login.user._id,
+      //   username: data.login.user.username,
+      //   email: data.login.user.email,
+      //   location: data.login.user.location,
+      //   coordinates: data.login.user.coordinates
+      // })
+      localStorage.setItem("_id", data.login.user._id);
+      localStorage.setItem("username", data.login.user.username);
+      localStorage.setItem("email", data.login.user.email);
+      localStorage.setItem("location", data.login.user.location);
+      localStorage.setItem("coordinates", JSON.stringify(data.login.user.coordinates));
+      
+      // console.log(userInfo);
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);

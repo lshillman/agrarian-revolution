@@ -30,6 +30,11 @@ class AuthService {
 
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('_id');
+    localStorage.removeItem('email');
+    localStorage.removeItem('username');
+    localStorage.removeItem('location');
+    localStorage.removeItem('coordinates');
     window.location.reload();
   }
 }

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CREATE_USER } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 import Auth from '../utils/auth';
+
+
 
 const SignupForm = () => {
     const [formState, setFormState] = useState({
@@ -36,6 +38,13 @@ const SignupForm = () => {
             const { data } = await createUser({
                 variables: { ...formState, location },
             });
+            console.log(data.createUser.user);
+
+            localStorage.setItem("_id", data.createUser.user._id);
+            localStorage.setItem("username", data.createUser.user.username);
+            localStorage.setItem("email", data.createUser.user.email);
+            localStorage.setItem("location", data.createUser.user.location);
+            localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
 
             Auth.login(data.createUser.token);
         } catch (e) {
