@@ -84,7 +84,7 @@ const Search = () => {
               </div>
 
               <div style={{ flexBasis: "75%" }}>
-                <MapContainer center={userCoords} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
+                <MapContainer center={userCoords || [37.87114171034828, -122.27379801035863]} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
                   {/* <LocationMarker /> */}
                   
                   <TileLayer
