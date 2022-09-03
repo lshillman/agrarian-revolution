@@ -15,7 +15,7 @@ export default function Header() {
             <div id="nav">
                 <nav id="nav-links">
                     <Link to="/"><h3>Find Veggies</h3></Link>
-                    <Link to="/"><h3>My Veggies</h3></Link>
+                    <Link to="/veggies"><h3>My Veggies</h3></Link>
                     <Link to="/"><h3>Requests</h3></Link>
                 </nav>
             </div>
