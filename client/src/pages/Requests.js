@@ -43,8 +43,7 @@ export default function Requests() {
                                             <h4>{req.requestor.username}</h4>
                                             <p className="veggie-desc">{req.content}</p>
                                             <p>{moment(req.timestamp).fromNow()}</p>
-                                            {console.log(req.responses)}
-                                            {req.responses && req.responses.length && req.responses.map((responses, i) => (
+                                            {req.responses.map((responses, i) => (
                                                 <div key={i}>
                                                     <p className="veggie-desc">{responses.content}</p>
                                                     {/* if id matches local storage, then render that username. else requestor username */}
@@ -62,6 +61,7 @@ export default function Requests() {
                                 <button className="delete-veggie-btn" >Respond</button>
                             </div>
                         }
+                        return <></>
                     })}
                 </div>)
             }
