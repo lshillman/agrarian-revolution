@@ -34,7 +34,6 @@ class AuthService {
     localStorage.removeItem('email');
     localStorage.removeItem('username');
     localStorage.removeItem('location');
-    localStorage.removeItem('coordinates');
     window.location.reload();
   }
 }
