@@ -1,4 +1,5 @@
 import React from "react"
+import moment from 'moment';
 
 const VeggiesList = ({ veggies, veggieClicked, selectedVeggie, onClickShowMarker }) => {
     if (!veggies?.length) {
@@ -14,9 +15,10 @@ const VeggiesList = ({ veggies, veggieClicked, selectedVeggie, onClickShowMarker
     return (
         <div>
             {veggies.map((veggie, i) => (
-                    <div onClick={() => onClickShowMarker(i)} key={i}>
-                        {veggie._id === selectedVeggie.current ? <h4 style={styles.h4}>{veggie.type}</h4> : <h4>{veggie.type}</h4>}
-                    </div>
+                <div onClick={() => onClickShowMarker(i)} key={i}>
+                    {veggie._id === selectedVeggie.current ? <h4 style={styles.h4}>{veggie.type}</h4> : <h4>{veggie.type}</h4>}
+                    <p>{moment(veggie.postedDate).fromNow()}</p>
+                </div>
             ))}
         </div>
     )
