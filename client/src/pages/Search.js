@@ -9,6 +9,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { L } from 'leaflet';
 import icons from '../utils/icons';
 
 const Search = () => {
@@ -35,6 +36,9 @@ const Search = () => {
   }
 
   const [showModal, setShowModal] = useState(false);
+
+  // var layer = new L.StamenTileLayer("watercolor")
+  // L.tileLayer.provider('Stamen.Watercolor').addTo(mapRef.current);
 
   return (
     <>
@@ -76,9 +80,10 @@ const Search = () => {
               <div style={{ flexBasis: "75%" }}>
                 <MapContainer center={JSON.parse(localStorage.getItem("coordinates"))} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
                   {/* <LocationMarker /> */}
+                  
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png"
                   />
 
                   {veggies.map((veggie, key) => (
