@@ -12,6 +12,12 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import { L } from 'leaflet';
 import icons from '../utils/icons';
 
+const userCoords = JSON.parse(localStorage.getItem("coordinates"));
+const userLoc = localStorage.getItem("location");
+const userId = localStorage.getItem("_id");
+const userUsername = localStorage.getItem("username");
+const userEmail = localStorage.getItem("email");
+
 const Search = () => {
   const { loading, data } = useQuery(QUERY_VEGGIES);
   const veggies = data?.veggies || [];
@@ -74,30 +80,32 @@ const Search = () => {
           <>
             <div id="map-veg" style={{ maxWidth: "1200px" }}>
               <div id="veggie-div" style={{ flexBasis: "25%" }}>
-                <VeggiesList veggies={veggies} veggieClicked={veggieClicked} selectedVeggie={selectedVeggie} onClickShowMarker={onClickShowMarker} />
+                <VeggiesList veggies={veggies} veggieClicked={veggieClicked} selectedVeggie={selectedVeggie} onClickShowMarker={onClickShowMarker} userUsername={userUsername} />
               </div>
 
               <div style={{ flexBasis: "75%" }}>
-                <MapContainer center={JSON.parse(localStorage.getItem("coordinates"))} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
+                <MapContainer center={userCoords} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
                   {/* <LocationMarker /> */}
                   
                   <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png"
+                    attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
                   />
 
-                  {veggies.map((veggie, key) => (
+                  {veggies.map((veggie, key) => {
+                    if (veggie.owner.username !== userUsername){
+                      console.log(veggie.owner)
+                      return <Marker key={key} ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
+                        click: (e) => {
+                          selectedVeggie.current = e.target.options.data;
+                          setVeggieClicked(true);
+                        },
+                      }}>
+                        <VeggiePopup veggie={veggie} />
+                      </Marker>}
+                      return <></>;
 
-                    <Marker key={key} ref={(element) => markerRef.current.push(element)} position={veggie.coordinates} icon={icons[veggie.type]} data={veggie._id} eventHandlers={{
-                      click: (e) => {
-                        selectedVeggie.current = e.target.options.data;
-                        setVeggieClicked(true);
-                      },
-                    }}>
-                      <VeggiePopup veggie={veggie} />
-                    </Marker>
-
-                  ))}
+                    })}
                 </MapContainer>
               </div>
             </div>
