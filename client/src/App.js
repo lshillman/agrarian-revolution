@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Search from './pages/Search';
 import MyVeggies from './pages/MyVeggies';
@@ -12,8 +12,6 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@ap
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { setContext } from '@apollo/client/link/context';
-
-
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -36,9 +34,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
-
   return (
     <ApolloProvider client={client}>
       <Router>

@@ -9,6 +9,20 @@ mutation createVeggie($type: String!, $owner: String!, $location: String!, $quan
 }
 `
 
+export const CREATE_RESPONSE = gql`
+  mutation createResponse($_id: String!, $content: String!, $sender: String!) {
+    createResponse(_id: $_id, content: $content, sender: $sender) {
+      responses {
+        content
+        sender {
+          _id
+        }
+        timestamp
+      }
+    }
+  }
+`;
+
 
 export const CREATE_USER = gql`
 mutation createUser($email: String!, $password: String!, $location: String!, $coordinates: [Float], $username: String!) {
