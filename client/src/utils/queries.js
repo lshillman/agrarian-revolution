@@ -16,6 +16,8 @@ export const QUERY_VEGGIES = gql`
           username
         }
         requests {
+          content
+          timestamp
           requestor {
             username
           }
@@ -39,9 +41,19 @@ export const QUERY_USER = gql`
           description
           photo
           requests {
+            _id
+            content
+            timestamp
             unreadMessages
             requestor {
               username
+            }
+            responses {
+              content
+              sender {
+                _id
+              }
+              timestamp
             }
           }
         }
