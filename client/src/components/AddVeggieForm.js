@@ -56,7 +56,7 @@ const AddVeggieForm = () => {
 
     return (
         <>
-                    <Form onSubmit={handleFormSubmit}>
+                    <Form id="add-veggie-form" onSubmit={handleFormSubmit}>
                         <select name='type' onChange={handleChange}>
                             <option>select one</option>
                             <option value="apples">apples</option>

@@ -69,11 +69,13 @@ button a {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    width: 1000px;
+    width: 1200px;
 }
 
 #top-search button {
     height: 40px;
+    background-color: #71AFDB;
+    border: none;
 }
 
 
@@ -87,7 +89,7 @@ button a {
 
 #map-veg {
     display: flex;
-    width: 1000px;
+    width: 1200px;
 
 }
 
@@ -103,6 +105,32 @@ button a {
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid lightgrey;
+    align-items: center;
 }
 
+.veggie-list-item:hover {
+    background-color: #EEF3F9
+}
 
+.veggie-list-item img {
+    height: 50px;
+    padding-right: 5px;
+}
+
+.veggie-list-item h4  {
+    padding-right: 10px;
+}
+
+.veggie-list-item p {
+    padding-top: 8px;
+}
+
+#veggie-div {
+    height: 500px;
+    overflow-y:scroll;
+}
+
+#add-veggie-form {
+    display: flex;
+    flex-direction: column;
+}
