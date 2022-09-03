@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from 'react-router-dom';
 import { Popup } from "react-leaflet";
+import moment from "moment";
 import Auth from "../utils/auth";
 
 const VeggiePopup = ({ veggie }) => {
@@ -12,7 +13,7 @@ const VeggiePopup = ({ veggie }) => {
                 {Auth.loggedIn() ? <button>Request</button> : <><Link to="/signup">Sign up</Link> to request this veggie!</>}
                 <p>{veggie.description}</p>
                 {veggie.photo && <img src={veggie.photo} alt={veggie.type} style={{ width: "100%" }} />}
-                <p>Posted on {veggie.postedDate}</p>
+                <p>Posted {moment(veggie.postedDate).fromNow()} by {veggie.owner.username}</p>
             </div>
         </Popup>
     );
