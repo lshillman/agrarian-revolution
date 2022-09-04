@@ -9,15 +9,12 @@ const VeggiesList = ({ veggies, onClickShowMarker, userUsername }) => {
 
     return (
         <div>
-            {veggies.map((veggie, i) => {
-                if (veggie.owner.username !== userUsername) {
-                    return <div className="veggie-list-item" onClick={() => onClickShowMarker(i)} key={i}>
-                        <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
-                        <h4>{veggie.type}</h4>
-                        <p>{moment(veggie.postedDate).fromNow()}</p>
-                    </div>
-                }
-                return <React.Fragment key={i}></React.Fragment>;
+            {veggies.filter((veggie) => (veggie.owner.username !== userUsername)).map((veggie, i) => {
+                return <div className="veggie-list-item" onClick={() => onClickShowMarker(i)} key={i}>
+                    <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
+                    <h4>{veggie.type}</h4>
+                    <p>{moment(veggie.postedDate).fromNow()}</p>
+                </div>
             })}
         </div>
     )
