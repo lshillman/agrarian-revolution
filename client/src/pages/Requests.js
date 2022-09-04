@@ -35,7 +35,7 @@ export default function Requests() {
             console.error(e)
         }
     }
-    
+
     const displayResponses = (e) => {
         setShowResponses(prev => !prev);
         setBtnId(e.currentTarget.id);
@@ -51,16 +51,18 @@ export default function Requests() {
                         if (veggie.requests.length) {
                             return <div className="single-request" key={i}>
                                 <div className="single-request-header">
-                                    <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
-                                    <h2>Someone wants your {veggie.type}</h2>
+                                    {/* <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" /> */}
+                                    {/* <h2>Someone wants your {veggie.type}</h2> */}
                                 </div>
                                 <div>
                                     {/* traverse the user's veggies' requests array */}
                                     {veggie.requests.map((req, i) => (
-                                        <VeggiesRequests reference={ref} btnId={btnId} request={req} currVeg={veggie._id} sendResponse={sendResponse} setResponse={setResponse} showResponses={showResponses} key={i}/>
+                                        <>
+                                            <VeggiesRequests veggie={veggie} reference={ref} btnId={btnId} request={req} currVeg={req.requestor.username} sendResponse={sendResponse} setResponse={setResponse} showResponses={showResponses} key={i} />
+                                            <button className="delete-veggie-btn" id={req.requestor.username} onClick={(e) => displayResponses(e)}>Respond</button>
+                                        </>
                                     ))}
                                 </div>
-                                <button className="delete-veggie-btn" id={veggie._id} onClick={(e) => displayResponses(e)}>Respond</button>
                             </div>
                         }
                         return <></>
