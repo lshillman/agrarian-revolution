@@ -132,13 +132,48 @@ main {
     flex-direction: column;
 }
 
-/* =========== MY VEGGIES ============*/
+/* ========== MY VEGGIES ==========*/
 
 .my-single-veggie {
     display:flex;
     justify-content: space-between;
+    border: 1px solid #ccc;
 }
 
 .my-single-veggie img {
     width: 60px;
+}
+
+
+/* ========== REQUESTS & RESPONSES ==========*/
+
+.single-request {
+    border: 1px solid #ccc;
+}
+
+.single-request-header {
+    padding: 1rem;
+}
+
+.single-request img {
+    width: 60px;
+}
+
+.single-request h2 {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.single-response {
+    outline: 1px solid red;
+    padding: 0.5rem 1rem;
+}
+
+.sender-meta {
+    margin-bottom: 0;
+}
+
+.message-timestamp {
+    color: #767676;
+    margin-left: 0.5rem;
 }
