@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Search from './pages/Search';
 import MyVeggies from './pages/MyVeggies';
 import Requests from './pages/Requests';
@@ -72,6 +72,10 @@ function App() {
             <Route
               path="/login"
               element={<LoginForm />}
+            />
+            <Route
+              path="/*"
+              element={<Navigate replace to="/" />}
             />
           </Routes>
           <Footer />
