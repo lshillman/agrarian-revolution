@@ -12,6 +12,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@ap
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { setContext } from '@apollo/client/link/context';
+import VeggiesRequests from './components/VeggieRequests';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -54,7 +55,7 @@ function App() {
             />
             <Route
               path="/requests/:requestId"
-              element={<Conversation/>}
+              element={<VeggiesRequests />}
             />
             <Route
               path="/profile/:username"

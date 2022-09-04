@@ -47,6 +47,11 @@ const resolvers = {
         veggie: async (parent, { _id }) => {
             return Veggie.find({ _id: _id }).populate('requests').exec();
         },
+        request: async (parent, { _id }) => {
+            const req = await Request.find({ _id: _id }).populate('veggie').populate('requestor').exec();
+            console.log(req)
+            return req;
+        },
         requests: async (parent) => {
             return Request.find({ veggie: parent._id }).populate('requestor').exec();
         },
