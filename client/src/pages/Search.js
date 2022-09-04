@@ -25,6 +25,7 @@ const Search = () => {
   const markerRef = useRef([]);
 
   const onClickShowMarker = (veggieIndex) => {
+    console.log(veggieIndex);
     const map = mapRef.current
     if (!map) {
       return
