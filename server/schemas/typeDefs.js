@@ -54,6 +54,7 @@ const typeDefs = gql`
         user(_id: String): [User]
         veggies: [Veggie]
         veggie(_id: String): [Veggie]
+        request(_id: String): [Request]
         requests(_id: String): [Request]
         me: User
     }
