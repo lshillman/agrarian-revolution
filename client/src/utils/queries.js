@@ -32,6 +32,7 @@ export const QUERY_USER = gql`
       user(_id: $_id) {
         _id
         veggies {
+          _id
           type
           postedDate
           expiredAt

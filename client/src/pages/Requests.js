@@ -17,6 +17,8 @@ export default function Requests() {
     const ref = useRef(null);
     // Ability to display responses
     const [showResponses, setShowResponses] = useState(false);
+    // button id
+    const [btnId, setBtnId] = useState("");
 
     // Populate database with the newly-created response
     const sendResponse = async (e, reqId) => {
@@ -32,6 +34,11 @@ export default function Requests() {
         } catch (e) {
             console.error(e)
         }
+    }
+    
+    const displayResponses = (e) => {
+        setShowResponses(prev => !prev);
+        setBtnId(e.currentTarget.id);
     }
 
     return (
@@ -50,10 +57,10 @@ export default function Requests() {
                                 <div>
                                     {/* traverse the user's veggies' requests array */}
                                     {veggie.requests.map((req, i) => (
-                                        <VeggiesRequests reference={ref} request={req} sendResponse={sendResponse} setResponse={setResponse} showResponses={showResponses} key={i}/>
+                                        <VeggiesRequests reference={ref} btnId={btnId} request={req} currVeg={veggie._id} sendResponse={sendResponse} setResponse={setResponse} showResponses={showResponses} key={i}/>
                                     ))}
                                 </div>
-                                <button className="delete-veggie-btn" onClick={() => setShowResponses(prev => !prev)}>{showResponses ? "Hide Messages" : "Respond"}</button>
+                                <button className="delete-veggie-btn" id={veggie._id} onClick={(e) => displayResponses(e)}>Respond</button>
                             </div>
                         }
                         return <></>
