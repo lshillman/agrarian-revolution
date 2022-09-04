@@ -1,22 +1,14 @@
-
-#agrirify {
-    font-family: 'Inter', sans-serif;
-    margin: 25px;
-    margin-top: 40px;
-    font-size: 1.5rem;
-}
-
-#agrirify a {
-    text-decoration: none;
-    color: #006723;
-}
-#header {
+header {
     background-color: #E8FACD;
+}
+
+#header-content {
     height: 100px;
-    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 h1, h2, h3, h4 {
@@ -25,22 +17,22 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 
-#nav {
+nav {
     display: flex;
-    flex-wrap: wrap;
-    font-size: 12px;
+    gap: 2rem;
 }
 
-#nav-links a {
+nav a {
     text-decoration: none;
-    margin: 20px;
     font-family: 'Inter', sans-serif;
     font-weight: bold;
     color: #006723;
-    display: inline-block;
-    font-size: 16px;
-    margin-top: 40px;
+    font-size: 1.2rem;
+    line-height: 100px;
+}
 
+nav a:hover {
+    color: #006723;
 }
 
 button  {
@@ -58,12 +50,15 @@ button a {
 }
 
 #logout-btn, #login-btn, #signup-btn {
-    float: right;
-    margin: 20px;
     text-decoration: none;
     color: white;
-    margin-top: 30px;
     
+}
+
+#login {
+    display:flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 #top-search {
@@ -82,6 +77,8 @@ button a {
 main {
     max-width: 1200px;
     margin: 0 auto;
+    min-height: calc(100vh - 13rem);
+    padding: 2rem 0;
 }
 
 #map-veg {
@@ -199,4 +196,19 @@ main {
 .message-timestamp {
     color: #767676;
     margin-left: 0.5rem;
+}
+
+
+
+
+/* ========== FOOTER ==========*/
+
+footer {
+    background-color:#E8FACD;
+    padding: 1rem;
+}
+
+#footer-content{
+    max-width: 1200px;
+    margin: 0 auto;
 }

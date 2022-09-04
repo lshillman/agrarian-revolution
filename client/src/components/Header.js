@@ -10,21 +10,20 @@ export default function Header() {
     };
 
     return (
-        <div id="header">
-            <h1 id="agrirify"><Link to="/">agrarify</Link></h1>
-
-            <div id="nav">
-                <nav id="nav-links">
-                    <Link to="/"><h3>Find Veggies</h3></Link>
-                    <Link to="/veggies"><h3>My Veggies</h3></Link>
-                    <Link to="/requests"><h3>Requests</h3></Link>
-                </nav>
+        <header>
+            <div id="header-content">
+                <img src={require('./assets/agrarify-logo.svg').default} alt="Agrarify Logo" />
+                    <nav>
+                        <Link to="/">Find Veggies</Link>
+                        <Link to="/veggies">My Veggies</Link>
+                        <Link to="/requests">Requests</Link>
+                    </nav>
+                <div id="login">
+                    {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
+                    {!Auth.loggedIn() && <button id="login-btn"><Link to="/login">Login</Link></button>}
+                    {!Auth.loggedIn() && <button id="signup-btn"><Link to="/signup">Signup</Link></button>}
+                </div>
             </div>
-            <div id="login">
-                {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
-                {!Auth.loggedIn() && <button id="login-btn"><Link to="/login">Login</Link></button>}
-                {!Auth.loggedIn() && <button id="signup-btn"><Link to="/signup">Signup</Link></button>}
-            </div>
-        </div>
+        </header>
     )
 }
