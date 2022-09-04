@@ -1,12 +1,7 @@
 import React, { useRef, useState } from "react";
 import moment from "moment";
-import VeggieResponses from "./VeggieResponses";
 import icons from "../utils/icons";
-import { useParams } from "react-router-dom";
-import { QUERY_REQUEST } from "../utils/queries";
-import { useMutation, useQuery } from '@apollo/client';
 import { Link } from "react-router-dom";
-import Requests from "../pages/Requests";
 
 
 export default function OutgoingRequests(props) {
@@ -18,7 +13,7 @@ export default function OutgoingRequests(props) {
 
 
     return (
-        <main>
+        <>
             <h2>Veggies I Want</h2>
             <div className="requests-list">
                 {/* traverse the user's veggies */}
@@ -56,7 +51,7 @@ export default function OutgoingRequests(props) {
 
                 })}
             </div>
-        </main>
+        </>
     )
 
 
