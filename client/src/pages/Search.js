@@ -7,6 +7,7 @@ import { QUERY_VEGGIES } from '../utils/queries';
 import { Button, Modal } from 'react-bootstrap';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import icons from '../utils/icons';
+import RequestVeggieForm from '../components/RequestVeggieForm';
 
 const userCoords = JSON.parse(localStorage.getItem("coordinates"));
 // const userLoc = localStorage.getItem("location");
@@ -38,7 +39,8 @@ const Search = () => {
     }
   }
 
-  const [showModal, setShowModal] = useState(false);
+  const [showPostModal, setShowPostModal] = useState(false);
+
 
   return (
     <>
@@ -46,7 +48,7 @@ const Search = () => {
         <div id="top-search">
           <h2>Veggies Near You</h2>
           {/* <Button><Link to="/addveggie">Post Veggie</Link></Button> */}
-          <Button onClick={() => setShowModal(true)}>
+          <Button onClick={() => setShowPostModal(true)}>
             Post Veggie
           </Button>
         </div>
@@ -54,18 +56,20 @@ const Search = () => {
 
       <Modal
         size='lg'
-        show={showModal}
-        onHide={() => setShowModal(false)}
+        show={showPostModal}
+        onHide={() => setShowPostModal(false)}
         aria-labelledby='veggie-modal'>
 
         <Modal.Header closeButton>
           <Modal.Title>Post a Veggie</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddVeggieForm handleModalClose={() => setShowModal(false)} />
+          <AddVeggieForm handleModalClose={() => setShowPostModal(false)} />
         </Modal.Body>
 
       </Modal>
+
+
 
       <main id="search-pg" >
         {loading ? (

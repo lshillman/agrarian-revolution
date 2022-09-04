@@ -32,7 +32,7 @@ const RequestVeggieForm = ({ veggie }) => {
             const requestor = localStorage.getItem('_id');
 
             await createRequest({
-                variables: { content, veggie, requestor },
+                variables: { content, veggie: veggie._id, requestor },
             });
             window.location.reload();
         } catch (e) {
