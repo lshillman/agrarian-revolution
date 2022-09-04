@@ -3,18 +3,20 @@ import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_RESPONSE } from "../utils/mutations";
 import { QUERY_USER } from "../utils/queries";
 import icons from "../utils/icons";
-import moment from "moment";
+import VeggiesRequests from "../components/VeggieRequests";
 
 export default function Requests() {
+    // Query our current user's array of veggies
     const { loading, data } = useQuery(QUERY_USER, { variables: { _id: localStorage.getItem('_id') } });
     const veggiesRequests = data?.user[0].veggies || [];
-
-    const [response, setResponse] = useState("");
-
+    // Mutation to populate a request's array of responses
     const [createResponse] = useMutation(CREATE_RESPONSE)
-
+    // Store the newly-typed response to pass to our createResponse mutation
+    const [response, setResponse] = useState("");
+    // Used to empty response text box when the user clicks Send
     const ref = useRef(null);
 
+    // Populate database with the newly-created response
     const sendResponse = async (e, reqId) => {
         e.preventDefault();
         try {
@@ -33,7 +35,7 @@ export default function Requests() {
     return (
         <main>
             <h1>Requests</h1>
-            {loading ? (<div>loading...</div>) : (
+            {loading ? (<div>Loading...</div>) : (
                 <div className="requests-list">
                     {/* traverse the user's veggies */}
                     {veggiesRequests.map((veggie, i) => {
@@ -46,23 +48,7 @@ export default function Requests() {
                                 <div>
                                     {/* traverse the user's veggies' requests array */}
                                     {veggie.requests.map((req, i) => (
-                                        <div key={i}>
-                                            <div className="single-response">
-                                                <p className="sender-meta"><strong>{req.requestor.username}</strong> <span className="message-timestamp">{moment(req.timestamp).fromNow()}</span></p>
-                                                <p>{req.content}</p>
-                                            </div>
-                                            {req.responses.map((response, i) => (
-                                                <div className="single-response" key={i}>
-                                                    {/* if id matches local storage, then render that username. else requestor username */}
-                                                    <p className="sender-meta"><strong>{(response.sender._id === localStorage.getItem('_id')) ? "You" : req.requestor.username}</strong> <span className="message-timestamp">{moment(response.timestamp).fromNow()}</span></p>
-                                                    <p>{response.content}</p>
-                                                </div>
-                                            ))}
-                                            <form className="response-form" onSubmit={(e) => sendResponse(e, req._id)}>
-                                                <textarea ref={ref} placeholder={"Reply to " + req.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>
-                                                <button>Send</button>
-                                            </form>
-                                        </div>
+                                        <VeggiesRequests reference={ref} request={req} sendResponse={sendResponse} setResponse={setResponse} key={i}/>
                                     ))}
                                 </div>
                                 <button className="delete-veggie-btn" >Respond</button>
