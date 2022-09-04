@@ -134,14 +134,37 @@ main {
 
 /* ========== MY VEGGIES ==========*/
 
-.my-single-veggie {
+.my-veggies-list {
+    display:flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.single-veggie {
     display:flex;
     justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem;
     border: 1px solid #ccc;
 }
 
-.my-single-veggie img {
+.single-veggie img {
     width: 60px;
+}
+
+.veggie-meta {
+    display: flex;
+    gap: 1rem;
+}
+
+.veggie-meta h4 {
+    display:inline-block;
+}
+
+.veggie-meta .timestamp {
+    color: #767676;
+    margin-left: 0.5rem;
+    display:inline-block;
 }
 
 
