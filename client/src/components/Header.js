@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from 'react';
 import Auth from "../utils/auth";
 import { Link } from 'react-router-dom';
+import { Button, Modal } from 'react-bootstrap';
+import LoginForm from '../components/LoginForm';
 
 export default function Header() {
 
@@ -9,19 +11,35 @@ export default function Header() {
         Auth.logout();
     };
 
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <header>
             <div id="header-content">
                 <img src={require('./assets/agrarify-logo.svg').default} alt="Agrarify Logo" />
-                    <nav>
-                        <Link to="/">Find Veggies</Link>
-                        <Link to="/veggies">My Veggies</Link>
-                        <Link to="/requests">Requests</Link>
-                    </nav>
+                <nav>
+                    <Link to="/">Find Veggies</Link>
+                    <Link to="/veggies">My Veggies</Link>
+                    <Link to="/requests">Requests</Link>
+                </nav>
                 <div id="login">
                     {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
                     {!Auth.loggedIn() && <button id="login-btn"><Link to="/login">Login</Link></button>}
-                    {!Auth.loggedIn() && <button id="signup-btn"><Link to="/signup">Signup</Link></button>}
+                    {!Auth.loggedIn() && <button id="login-btn"onClick={() => setShowModal(true)}>Login</button>}
+                    <Modal
+                        size='lg'
+                        show={showModal}
+                        onHide={() => setShowModal(false)}
+                        aria-labelledby='login-modal'>
+
+                        <Modal.Header closeButton>
+                            <Modal.Title>Login</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <LoginForm handleModalClose={() => setShowModal(false)} />
+                        </Modal.Body>
+                    </Modal>
+
                 </div>
             </div>
         </header>

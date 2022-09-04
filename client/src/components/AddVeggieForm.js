@@ -114,33 +114,34 @@ const AddVeggieForm = () => {
                     value={formState.photo}
                     onChange={handleChange}
                 />
-                <input
-                    className="form-input"
-                    placeholder="description"
-                    name="description"
-                    type="text"
-                    value={formState.description}
-                    onChange={handleChange}
-                />
-                <button
-                    className="btn btn-block btn-info"
-                    style={{ cursor: 'pointer' }}
-                    type="submit"
-                >
-                    Submit
-                </button>
 
-            </Form>
+                        <input
+                            className="form-input"
+                            placeholder="description"
+                            name="description"
+                            type="text"
+                            value={formState.description}
+                            onChange={handleChange}
+                        />
+                        <button
+                            className="btn btn-block btn-info"
+                            style={{ cursor: 'pointer' }}
+                            type="submit"
+                        >
+                            Submit
+                        </button>
+
+                </Form>
 
 
-            {error && (
-                <div className="my-3 p-3 bg-danger text-white">
-                    {error.message}
-                </div>
-            )}
+                {error && (
+                    <div className="my-3 p-3 bg-danger text-white">
+                        {error.message}
+                    </div>
+                )}
 
-        </>
-    )
+            </>
+            )
 }
 
-export default AddVeggieForm
+            export default AddVeggieForm
