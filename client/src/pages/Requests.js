@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_RESPONSE } from "../utils/mutations";
 import { QUERY_USER } from "../utils/queries";
@@ -13,6 +13,8 @@ export default function Requests() {
 
     const [createResponse] = useMutation(CREATE_RESPONSE)
 
+    const ref = useRef(null);
+
     const sendResponse = async (e, reqId) => {
         e.preventDefault();
         try {
@@ -21,6 +23,8 @@ export default function Requests() {
             })
 
             setResponse("");
+            ref.current.value = "";
+            window.location.reload();
         } catch (e) {
             console.error(e)
         }
@@ -30,29 +34,32 @@ export default function Requests() {
         <main>
             <h1>Requests</h1>
             {loading ? (<div>loading...</div>) : (
-                <div className="my-veggies-list">
-                    {/* travers the user's veggies */}
+                <div className="requests-list">
+                    {/* traverse the user's veggies */}
                     {veggiesRequests.map((veggie, i) => {
                         if (veggie.requests.length) {
-                            return <div className="my-single-veggie" key={i}>
-                                <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
+                            return <div className="single-request" key={i}>
+                                <div className="single-request-header">
+                                    <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
+                                    <h2>Someone wants your {veggie.type}</h2>
+                                </div>
                                 <div>
-                                    {/* travers the user's veggies' requests array */}
+                                    {/* traverse the user's veggies' requests array */}
                                     {veggie.requests.map((req, i) => (
                                         <div key={i}>
-                                            <h4>{req.requestor.username}</h4>
-                                            <p className="veggie-desc">{req.content}</p>
-                                            <p>{moment(req.timestamp).fromNow()}</p>
-                                            {req.responses.map((responses, i) => (
-                                                <div key={i}>
-                                                    <p className="veggie-desc">{responses.content}</p>
+                                            <div className="single-response">
+                                                <p className="sender-meta"><strong>{req.requestor.username}</strong> <span className="message-timestamp">{moment(req.timestamp).fromNow()}</span></p>
+                                                <p>{req.content}</p>
+                                            </div>
+                                            {req.responses.map((response, i) => (
+                                                <div className="single-response" key={i}>
                                                     {/* if id matches local storage, then render that username. else requestor username */}
-                                                    <p className="veggie-desc">{(responses.sender._id === localStorage.getItem('_id')) ? localStorage.getItem('username') : req.requestor.username}</p>
-                                                    <p className="veggie-desc">{responses.timestamp}</p>
+                                                    <p className="sender-meta"><strong>{(response.sender._id === localStorage.getItem('_id')) ? "You" : req.requestor.username}</strong> <span className="message-timestamp">{moment(response.timestamp).fromNow()}</span></p>
+                                                    <p>{response.content}</p>
                                                 </div>
                                             ))}
                                             <form className="response-form" onSubmit={(e) => sendResponse(e, req._id)}>
-                                                <textarea onChange={(e) => setResponse(e.target.value)}></textarea>
+                                                <textarea ref={ref} placeholder={"Reply to " + req.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>
                                                 <button>Send</button>
                                             </form>
                                         </div>
