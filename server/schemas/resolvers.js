@@ -34,7 +34,13 @@ const resolvers = {
                     path: 'requests',
                     populate: 'requestor'
                 }
-            }).populate('sent_requests').exec();
+            }).populate({
+                path: 'sent_requests',
+                populate: {
+                    path: 'veggie',
+                    populate: 'owner'
+                }
+            }).exec();
         },
         veggies: async () => {
             const veggie = Veggie.find({}).populate({

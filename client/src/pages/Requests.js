@@ -5,6 +5,7 @@ import VeggiesRequests from "../components/VeggieRequests";
 import { Link } from "react-router-dom";
 import icons from "../utils/icons";
 import moment from "moment";
+import OutgoingRequests from "../components/OutgoingRequests";
 
 
 
@@ -60,6 +61,7 @@ export default function Requests() {
                         }
                         return <></>
                     })}
+                    <OutgoingRequests data={data} />
                 </div>)
             }
         </main>

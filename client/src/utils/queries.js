@@ -88,6 +88,27 @@ export const QUERY_USER = gql`
   query user($_id: String!) {
       user(_id: $_id) {
         _id
+        sent_requests {
+          content
+          veggie {
+            type
+            photo
+            description
+            postedDate
+            owner {
+              _id
+              username
+            }
+          }
+          timestamp
+          responses {
+            content
+            sender {
+              _id
+            }
+            timestamp
+          }
+        }
         veggies {
           _id
           type
