@@ -142,7 +142,7 @@ main {
     justify-content: space-between;
     align-items: flex-start;
     padding: 1rem;
-    border: 1px solid #ccc;
+    box-shadow: 1px 2px 5px #dedede;
 }
 
 .single-veggie img {
@@ -185,7 +185,7 @@ main {
 }
 
 .single-response {
-    outline: 1px solid red;
+    border-bottom: 1px solid #ddd;
     padding: 0.5rem 1rem;
 }
 
@@ -204,7 +204,7 @@ main {
 /* ========== FOOTER ==========*/
 
 footer {
-    background-color:#E8FACD;
+    border-top: 1px solid #eee;
     padding: 1rem;
 }
 
