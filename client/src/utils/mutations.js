@@ -7,7 +7,15 @@ mutation createVeggie($type: String!, $owner: String!, $location: String!, $quan
       type
   }
 }
-`
+`;
+
+export const DELETE_VEGGIE = gql`
+mutation deleteVeggie($_id: String) {
+  deleteVeggie(_id: $_id){
+      _id
+  }
+}
+`;
 
 export const CREATE_REQUEST = gql`
   mutation createRequest($veggie: String, $content: String, $requestor: String) {
