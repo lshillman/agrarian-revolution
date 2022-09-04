@@ -15,6 +15,8 @@ export default function Requests() {
     const [response, setResponse] = useState("");
     // Used to empty response text box when the user clicks Send
     const ref = useRef(null);
+    // Ability to display responses
+    const [showResponses, setShowResponses] = useState(false);
 
     // Populate database with the newly-created response
     const sendResponse = async (e, reqId) => {
@@ -48,10 +50,10 @@ export default function Requests() {
                                 <div>
                                     {/* traverse the user's veggies' requests array */}
                                     {veggie.requests.map((req, i) => (
-                                        <VeggiesRequests reference={ref} request={req} sendResponse={sendResponse} setResponse={setResponse} key={i}/>
+                                        <VeggiesRequests reference={ref} request={req} sendResponse={sendResponse} setResponse={setResponse} showResponses={showResponses} key={i}/>
                                     ))}
                                 </div>
-                                <button className="delete-veggie-btn" >Respond</button>
+                                <button className="delete-veggie-btn" onClick={() => setShowResponses(prev => !prev)}>{showResponses ? "Hide Messages" : "Respond"}</button>
                             </div>
                         }
                         return <></>
