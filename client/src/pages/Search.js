@@ -8,6 +8,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import icons from '../utils/icons';
 import RequestVeggieForm from '../components/RequestVeggieForm';
+import PostVeggieModal from '../components/PostVeggieModal';
 
 const userCoords = JSON.parse(localStorage.getItem("coordinates"));
 // const userLoc = localStorage.getItem("location");
@@ -48,28 +49,9 @@ const Search = () => {
         <div id="top-search">
           <h2>Veggies Near You</h2>
           {/* <Button><Link to="/addveggie">Post Veggie</Link></Button> */}
-          <Button onClick={() => setShowPostModal(true)}>
-            Post Veggie
-          </Button>
+          <PostVeggieModal />
         </div>
       </div>
-
-      <Modal
-        size='lg'
-        show={showPostModal}
-        onHide={() => setShowPostModal(false)}
-        aria-labelledby='veggie-modal'>
-
-        <Modal.Header closeButton>
-          <Modal.Title>Post a Veggie</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <AddVeggieForm handleModalClose={() => setShowPostModal(false)} />
-        </Modal.Body>
-
-      </Modal>
-
-
 
       <main id="search-pg" >
         {loading ? (
