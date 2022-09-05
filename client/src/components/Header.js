@@ -17,12 +17,12 @@ export default function Header() {
     return (
         <header>
             <div id="header-content">
-                <img src={require('./assets/agrarify-logo.svg').default} alt="Agrarify Logo" />
-                <nav>
+                <Link to="/" className="logo-link"><img src={require('./assets/agrarify-logo.svg').default} alt="Agrarify Logo" /></Link>
+                {Auth.loggedIn() && <nav>
                     <Link to="/">Find Veggies</Link>
                     <Link to="/veggies">My Veggies</Link>
                     <Link to="/requests">Requests</Link>
-                </nav>
+                </nav>}
                 <div id="login">
                     {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
                     {!Auth.loggedIn() && <button id="login-signup-btn" onClick={() => setShowModal(true)}>Login/Signup</button>}

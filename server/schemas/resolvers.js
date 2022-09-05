@@ -54,7 +54,13 @@ const resolvers = {
             return Veggie.find({ _id: _id }).populate('requests').exec();
         },
         request: async (parent, { _id }) => {
-            const req = await Request.find({ _id: _id }).populate('veggie').populate('requestor').exec();
+            const req = await Request.find({ _id: _id }).populate({
+                path: 'veggie',
+                populate: 'owner'
+            }).populate('requestor').populate({
+                path: 'responses',
+                populate: 'sender'
+            }).exec();
             console.log(req)
             return req;
         },

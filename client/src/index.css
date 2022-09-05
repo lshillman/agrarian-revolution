@@ -17,6 +17,10 @@ h1, h2, h3, h4 {
     font-weight: bold;
 }
 
+.logo-link {
+    width: 140px;
+}
+
 nav {
     display: flex;
     gap: 2rem;
@@ -83,8 +87,15 @@ main {
 
 #map-veg {
     display: flex;
-    width: 1200px;
+    max-width: 1200px;
+}
 
+#veggie-sidebar {
+    flex-basis: 25%;
+}
+
+#leaflet-map {
+    flex-basis: 75%;
 }
 
 #top {
@@ -96,8 +107,7 @@ main {
 
 .veggie-list-item {
     display: flex;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 1rem 0;
     border-bottom: 1px solid lightgrey;
     align-items: center;
 }
@@ -112,11 +122,7 @@ main {
 }
 
 .veggie-list-item h4  {
-    padding-right: 10px;
-}
-
-.veggie-list-item p {
-    padding-top: 8px;
+    margin-bottom: 0;    
 }
 
 #veggie-div {

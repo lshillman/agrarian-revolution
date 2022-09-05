@@ -40,6 +40,7 @@ export default function OutgoingRequests(props) {
                                                 </Link>
                                             </button>
                                         </> */}
+                                        {console.log(request._id)}
                             <button className="delete-veggie-btn" id={request._id}>
                                 <Link to={`/requests/${request._id}`}>
                                     Respond

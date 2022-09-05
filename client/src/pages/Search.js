@@ -77,7 +77,7 @@ const Search = () => {
         ) : (
           <>
             <div id="map-veg" style={{ maxWidth: "1200px" }}>
-              <div id="veggie-div" style={{ flexBasis: "25%" }}>
+              <div id="veggie-sidebar">
                 <VeggiesList veggies={veggies}selectedVeggie={selectedVeggie} onClickShowMarker={onClickShowMarker} userUsername={userUsername} />
               </div>
 
