@@ -14,33 +14,21 @@ export default function OutgoingRequests(props) {
 
     return (
         <>
-            <h2>Veggies I Want</h2>
-            <div className="requests-list">
+            <h2>Requests you've sent</h2>
+            <div className="request-group">
                 {/* traverse the user's veggies */}
                 {/* if (outgoingRequests.length) */}
                 {outgoingRequests.map((request, i) => {
                     return <div className="single-request" key={i}>
-                        <div className="single-request-header">
+                        <div className="request-meta">
                             <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" />
-                            <h2>Request for {request.veggie.owner.username}'s {request.veggie.type}</h2>
+                            <p className="sender-meta"><strong>{request.veggie.owner.username}</strong><br></br><span className="message-timestamp">{moment(request.timestamp).fromNow()}</span></p>
+                            <p className="snippet">{request.responses.length ? request.responses[request.responses.length - 1].content : request.content}
+                                {console.log(request.content)}</p>
                         </div>
                         <div>
-                            {/* traverse the user's veggies' requests array */}
-                            {request.responses.length ? request.responses[request.responses.length - 1].content : request.content}
-                            {console.log(request.content)}
-
-                            {/* <> 
-                                            <div className="single-response">
-                                                <p className="sender-meta"><strong>{req.requestor.username}</strong> <span className="message-timestamp">{moment(req.timestamp).fromNow()}</span></p>
-                                                <p>{req.content}</p>
-                                            </div>
-                                            <button className="delete-veggie-btn" id={req._id}>
-                                                <Link to={`/requests/${req._id}`}>
-                                                    Respond
-                                                </Link>
-                                            </button>
-                                        </> */}
-                            <button className="delete-veggie-btn" id={request._id}>
+                            {console.log(request._id)}
+                            <button className="respond-btn" id={request._id}>
                                 <Link to={`/requests/${request._id}`}>
                                     Respond
                                 </Link>
