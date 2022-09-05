@@ -42,42 +42,49 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-          <Routes>
-            <Route
-              path="/"
-              element={<Search/>}
-            />
-            <Route
-              path="/veggies"
-              element={<MyVeggies/>}
-            />
-            <Route
-              path="/requests"
-              element={<Requests/>}
-            />
-            <Route
-              path="/requests/:requestId"
-              element={<VeggiesRequests />}
-            />
-            <Route
-              path="/profile/:username"
-              element={<Profile/>}
-            />
-            <Route
-              path="/signup"
-              element={<SignupForm/>}
-            />
-            <Route
-              path="/login"
-              element={<LoginForm />}
-            />
-            <Route
-              path="/*"
-              element={<Navigate replace to="/" />}
-            />
-          </Routes>
-          <Footer />
-        </Router>
+        <Routes>
+          <Route
+            path="/"
+            // TODO: replace the else w pretty page
+            element={auth.loggedIn() ? <Search /> : <LoginForm />}
+            // element={<Search />}
+            // onEnter={requireAuth}
+          />
+          <Route
+            path="/veggies"
+            element={auth.loggedIn() ? <MyVeggies /> : <LoginForm />}
+            // element={<MyVeggies />}
+          />
+          <Route
+            path="/requests"
+            element={auth.loggedIn() ? <Requests /> : <LoginForm />}
+            // element={<Requests />}
+          />
+          <Route
+            path="/requests/:requestId"
+            element={auth.loggedIn() ? <VeggiesRequests /> : <LoginForm />}
+            // element={<VeggiesRequests />}
+          />
+          <Route
+            path="/profile/:username"
+            element={auth.loggedIn() ? <Profile /> : <LoginForm />}
+            // element={<Profile />}
+          />
+          <Route
+            path="/signup"
+            element={<SignupForm />}
+          />
+          <Route
+            path="/login"
+            element={<LoginForm />}
+          />
+          <Route
+            path="/*"
+            element={<Navigate replace to="/" />}
+          />
+        </Routes>
+        <Footer />
+      </Router>
     </ApolloProvider>
   );
 }
