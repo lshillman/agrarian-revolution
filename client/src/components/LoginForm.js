@@ -31,14 +31,6 @@ const LoginForm = ({setUserInfo, userInfo}) => {
         variables: { ...formState },
       });
 
-      // TODO: set all the user info
-      // setUserInfo({
-      //   _id: data.login.user._id,
-      //   username: data.login.user.username,
-      //   email: data.login.user.email,
-      //   location: data.login.user.location,
-      //   coordinates: data.login.user.coordinates
-      // })
       localStorage.setItem("_id", data.login.user._id);
       localStorage.setItem("username", data.login.user.username);
       localStorage.setItem("email", data.login.user.email);
@@ -70,31 +62,34 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
+              <>
+                {!localStorage.getItem('id_token') && localStorage.getItem('username') ? <div className='expired-message'>Your session has expired. Please log in again.</div> : ''}
+                <form onSubmit={handleFormSubmit}>
+                  <input
+                    className="form-input"
+                    placeholder="Your email"
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                  />
+                  <input
+                    className="form-input"
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    className="btn btn-block btn-info"
+                    style={{ cursor: 'pointer' }}
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </>
             )}
 
             {error && (
