@@ -1,3 +1,5 @@
+/* ========== HEADER ==========*/
+
 header {
     background-color: #E8FACD;
 }
@@ -110,6 +112,7 @@ main {
     padding: 1rem 0;
     border-bottom: 1px solid lightgrey;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .veggie-list-item:hover {
@@ -123,6 +126,11 @@ main {
 
 .veggie-list-item h4  {
     margin-bottom: 0;    
+}
+
+.veggie-list-item p  {
+    margin: 0;
+    color: #767676;
 }
 
 #veggie-div {
@@ -173,8 +181,19 @@ main {
 
 /* ========== REQUESTS & RESPONSES ==========*/
 
+.request-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
 .single-request {
-    border: 1px solid #ccc;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 1px 2px 5px #dedede;
 }
 
 .single-request-header {
@@ -197,11 +216,22 @@ main {
 
 .sender-meta {
     margin-bottom: 0;
+    flex-shrink: 0;
 }
 
 .message-timestamp {
     color: #767676;
-    margin-left: 0.5rem;
+    /* margin-left: 0.5rem; */
+}
+
+.request-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.snippet {
+    margin: 0;
 }
 
 
