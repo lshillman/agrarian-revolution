@@ -13,6 +13,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { setContext } from '@apollo/client/link/context';
 import VeggiesRequests from './components/VeggieRequests';
+import auth from './utils/auth'
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -34,6 +35,7 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
 
 function App() {
   return (
@@ -60,10 +62,6 @@ function App() {
             <Route
               path="/profile/:username"
               element={<Profile/>}
-            />
-            <Route
-              path="/addveggie"
-              element={<AddVeggieForm />}
             />
             <Route
               path="/signup"

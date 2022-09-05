@@ -24,7 +24,7 @@ export default function IncomingRequests({ veggiesRequests, displayResponses }) 
                                     <div className="single-response">
                                         <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
                                         <p className="sender-meta"><strong>{req.requestor.username}</strong> <span className="message-timestamp">{moment(req.timestamp).fromNow()}</span></p>
-                                        <p>{req.content}</p>
+                                        <p>{req.responses.length ? req.responses[req.responses.length - 1].content : req.content}</p>
                                     </div>
                                     <button className="delete-veggie-btn" id={req._id} onClick={(e) => displayResponses(e)}>
                                         <Link to={`/requests/${req._id}`}>
