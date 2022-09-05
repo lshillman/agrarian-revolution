@@ -20,7 +20,6 @@ const typeDefs = gql`
         type: String!
         owner: User!
         postedDate: Date
-        expiredAt: Date
         location: String!
         coordinates: [Float]
         quantity: Int

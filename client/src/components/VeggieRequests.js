@@ -60,7 +60,7 @@ export default function VeggiesRequests() {
                                         <VeggieResponses request={request} response={response} key={i} />
                                     ))}
                                     <form className="response-form" onSubmit={(e) => sendResponse(e)}>
-                                        <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>
+                                        {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
                                         <button>Send</button>
                                     </form>
                                 </div>

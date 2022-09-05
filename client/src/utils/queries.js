@@ -6,7 +6,6 @@ export const QUERY_VEGGIES = gql`
         _id
         type
         postedDate
-        expiredAt
         location
         coordinates
         quantity
@@ -32,7 +31,6 @@ export const QUERY_SINGLE_VEGGIE = gql`
         _id
         type
         postedDate
-        expiredAt
         location
         coordinates
         quantity
@@ -59,12 +57,15 @@ export const QUERY_REQUEST = gql`
           _id
           type
           postedDate
-          expiredAt
           location
           coordinates
           quantity
           description
           photo
+          owner {
+            _id
+            username
+          }
         }
         requestor {
           _id
@@ -77,6 +78,7 @@ export const QUERY_REQUEST = gql`
           content
           sender {
             _id
+            username
           }
           timestamp
         }
@@ -89,6 +91,7 @@ export const QUERY_USER = gql`
       user(_id: $_id) {
         _id
         sent_requests {
+          _id
           content
           veggie {
             type
@@ -113,7 +116,6 @@ export const QUERY_USER = gql`
           _id
           type
           postedDate
-          expiredAt
           location
           coordinates
           quantity

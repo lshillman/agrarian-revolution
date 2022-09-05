@@ -13,14 +13,9 @@ const veggieSchema = new Schema ({
     },
     postedDate: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
+        expires: 604800
         // default: new Date()
-    },
-    expiredAt: {
-        type: Date,
-        default: new Date(Date.now().valueOf() + 604800000)
-        // default: this.postedDate + 604800 // use Date class instance methods
-        // new Date(this.postedDate.valueOf() + 604800)
     },
     location: {
         type: String,
