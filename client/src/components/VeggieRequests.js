@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { QUERY_REQUEST } from "../utils/queries";
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_RESPONSE } from "../utils/mutations";
-
+import auth from "../utils/auth";
 
 export default function VeggiesRequests() {
     const { requestId } = useParams();
@@ -64,10 +64,12 @@ export default function VeggiesRequests() {
                                     {request.responses.map((response, i) => (
                                         <VeggieResponses request={request} response={response} key={i} />
                                     ))}
-                                    <form className="response-form" onSubmit={(e) => sendResponse(e)}>
-                                        {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
-                                        <button>Send</button>
-                                    </form>
+                                    {auth.loggedIn() ? (
+                                        <form className="response-form" onSubmit={(e) => sendResponse(e)}>
+                                            {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
+                                            <button>Send</button>
+                                        </form>
+                                    ) : window.location.replace('/')}
                                 </div>
                             </>
                         ))}

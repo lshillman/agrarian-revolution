@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import moment from "moment";
 import icons from "../utils/icons";
 import { Link } from "react-router-dom";
+import auth from "../utils/auth";
 
 
 export default function OutgoingRequests(props) {
@@ -28,7 +29,7 @@ export default function OutgoingRequests(props) {
                         </div>
                         <div>
                             {console.log(request._id)}
-                            <button className="respond-btn" id={request._id}>
+                            <button className="respond-btn" id={request._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
                                 <Link to={`/requests/${request._id}`}>
                                     Respond
                                 </Link>
