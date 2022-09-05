@@ -56,7 +56,7 @@ export default function VeggiesRequests() {
 
 
                                 <div className="single-response" key={i}>
-                                    <p className="sender-meta"><strong>{request.requestor.username}</strong> <span className="message-timestamp">{moment(request.timestamp).fromNow()}</span></p>
+                                    <p className="sender-meta"><strong>{(request.requestor.username === localStorage.getItem('username')) ? "You" : request.requestor.username}</strong> <span className="message-timestamp">{moment().calendar(request.timestamp)}</span></p>
                                     <p>{request.content}</p>
                                 </div>
                                 {/* Traverse the request's array of responses */}
