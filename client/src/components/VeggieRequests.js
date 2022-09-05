@@ -43,14 +43,19 @@ export default function VeggiesRequests() {
     }
 
     return (
-        <div>
+        <main>
             {loading ? (<div>Loading...</div>) :
                 (
                     <>
                         {request.map((request, i) => (
                             <>
+                                <div className="conversation-header">
+                                    <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" className="conversation-icon" />
+                                    {(request.requestor._id === localStorage.getItem('_id')) ? <h1>You requested {request.veggie.owner.username}'s {request.veggie.type}</h1> : <h1>{request.requestor.username} requested your {request.veggie.type}</h1>}
+                                </div>
+
+
                                 <div className="single-response" key={i}>
-                                    <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" />
                                     <p className="sender-meta"><strong>{request.requestor.username}</strong> <span className="message-timestamp">{moment(request.timestamp).fromNow()}</span></p>
                                     <p>{request.content}</p>
                                 </div>
@@ -68,6 +73,6 @@ export default function VeggiesRequests() {
                         ))}
                     </>
                 )}
-        </div>
+        </main>
     )
 }

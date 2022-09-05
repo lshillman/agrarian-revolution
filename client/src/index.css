@@ -234,7 +234,29 @@ main {
     margin: 0;
 }
 
+.conversation-icon {
+    width: 50px;
+}
 
+.conversation-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.response-form {
+    display:flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.response-form textarea {
+    border: 1px solid #ccc;
+    width: 500px;
+    padding: 1rem;
+    border-radius: 8px;
+}
 
 
 /* ========== FOOTER ==========*/
