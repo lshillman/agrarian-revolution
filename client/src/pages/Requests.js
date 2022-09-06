@@ -15,16 +15,28 @@ export default function Requests() {
     // Query our current user's array of veggies
     const { loading, data } = useQuery(QUERY_USER, { variables: { _id: localStorage.getItem('_id') } });
     const veggiesRequests = data?.user[0].veggies || [];
+    const sentRequests = data?.user[0].sent_requests || [];
+
+    let count = 0;
+    veggiesRequests?.map(veggie => {
+        if (veggie.requests) {
+            count++;
+        }
+    })
 
     return (
         <main>
             <h1>Requests</h1>
             {loading ? (<div>Loading...</div>) : (
-                <div className="requests-list">
-                    <IncomingRequests veggiesRequests={veggiesRequests} />
-                    <OutgoingRequests data={data} />
-                </div>)
-            }
+                count === 0 && sentRequests.length === 0 ? (
+                    <div>You have not made or received requests yet</div>
+                ) : (
+                    <div className="requests-list">
+                        {count > 0 ? <IncomingRequests veggiesRequests={veggiesRequests} /> : null}
+                        {sentRequests.length > 0 ? <OutgoingRequests sentRequests={sentRequests} /> : null}
+                    </div>
+                )
+            )}
         </main>
     )
 }

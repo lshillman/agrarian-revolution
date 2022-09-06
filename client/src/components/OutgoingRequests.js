@@ -5,21 +5,14 @@ import { Link } from "react-router-dom";
 import auth from "../utils/auth";
 
 
-export default function OutgoingRequests(props) {
-
-
-    const outgoingRequests = props.data.user[0].sent_requests
-    console.log(outgoingRequests)
-
-
-
+export default function OutgoingRequests({ sentRequests }) {
     return (
         <>
             <h2>Requests you've sent</h2>
             <div className="request-group">
                 {/* traverse the user's veggies */}
                 {/* if (outgoingRequests.length) */}
-                {outgoingRequests.map((request, i) => {
+                {sentRequests.map((request, i) => {
                     return <div className="single-request" key={i}>
                         <div className="request-meta">
                             <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" />

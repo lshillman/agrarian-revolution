@@ -80,14 +80,15 @@ const resolvers = {
                 const response = await axios.get(`https://api.geocod.io/v1.7/geocode?api_key=408c538819a6c917135611465117c73100c9b41&q=${args.location}`)
 
                 const data = await response.data;
-                const coordinates = [data.results[0].location.lat, data.results[0].location.lng];
-
-                const user = await User.create({ ...args, coordinates: coordinates });
-                const token = await signToken(user);
-                return { user, token };
-
+                if (response.ok) {
+                    const coordinates = [data.results[0].location.lat, data.results[0].location.lng];
+    
+                    const user = await User.create({ ...args, coordinates: coordinates });
+                    const token = await signToken(user);
+                    return { user, token };
+                }
             } catch (e) {
-                console.error(e)
+                console.error(e);
             }
         },
         createVeggie: async (parent, args) => {
