@@ -28,7 +28,7 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { _id }) => {
-            return User.find({ _id: _id }).populate({
+            const user = await User.find({ _id: _id }).populate({
                 path: 'veggies',
                 populate: {
                     path: 'requests',
@@ -41,6 +41,8 @@ const resolvers = {
                     populate: 'owner'
                 }
             }).exec();
+            console.log(user)
+            return user;
         },
         veggies: async () => {
             const veggie = Veggie.find({}).populate({
@@ -80,15 +82,13 @@ const resolvers = {
                 const response = await axios.get(`https://api.geocod.io/v1.7/geocode?api_key=408c538819a6c917135611465117c73100c9b41&q=${args.location}`)
 
                 const data = await response.data;
-                if (response.ok) {
-                    const coordinates = [data.results[0].location.lat, data.results[0].location.lng];
-    
-                    const user = await User.create({ ...args, coordinates: coordinates });
-                    const token = await signToken(user);
-                    return { user, token };
-                }
+                const coordinates = [data.results[0].location.lat, data.results[0].location.lng];
+
+                const user = await User.create({ ...args, coordinates: coordinates });
+                const token = await signToken(user);
+                return { user, token };
             } catch (e) {
-                console.error(e);
+                console.error(e)
             }
         },
         createVeggie: async (parent, args) => {
@@ -117,6 +117,7 @@ const resolvers = {
                 { _id: request.requestor._id },
                 { $addToSet: { sent_requests: request._id } },
             )
+            console.log(request)
             return request;
         },
         createResponse: async (parent, { _id, content, sender }) => {

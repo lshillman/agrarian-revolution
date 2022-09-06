@@ -13,9 +13,7 @@ const AddVeggieForm = () => {
         description: '',
     });
 
-    // removed {data}
     const [createVeggie, { error }] = useMutation(CREATE_VEGGIE)
-
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,10 +33,8 @@ const AddVeggieForm = () => {
             const owner = localStorage.getItem('_id');
             const location = localStorage.getItem('location');
             const coordinates = JSON.parse(localStorage.getItem('coordinates'));
-            const quantity = formState.quantity * 1
+            const quantity = formState.quantity * 1 === 0 ? 1 : formState.quantity * 1;
 
-            console.log({ ...formState, owner, location, coordinates })
-            console.log(formState)
             await createVeggie({
                 variables: { ...formState, owner, location, coordinates, quantity },
             });
@@ -48,7 +44,6 @@ const AddVeggieForm = () => {
         }
 
     };
-
 
     return (
         <>
@@ -61,7 +56,7 @@ const AddVeggieForm = () => {
                     <option value="avocados">avocados</option>
                     <option value="basil">basil</option>
                     <option value="drybeans">beans - dry</option>
-                    <option value="green">beans - green</option>
+                    <option value="greenbeans">beans - green</option>
                     <option value="beets">beets</option>
                     <option value="bokchoy">bok choy</option>
                     <option value="broccoli">broccoli</option>
@@ -115,33 +110,33 @@ const AddVeggieForm = () => {
                     onChange={handleChange}
                 />
 
-                        <input
-                            className="form-input"
-                            placeholder="description"
-                            name="description"
-                            type="text"
-                            value={formState.description}
-                            onChange={handleChange}
-                        />
-                        <button
-                            className="btn btn-block btn-info"
-                            style={{ cursor: 'pointer' }}
-                            type="submit"
-                        >
-                            Submit
-                        </button>
+                <input
+                    className="form-input"
+                    placeholder="description"
+                    name="description"
+                    type="text"
+                    value={formState.description}
+                    onChange={handleChange}
+                />
+                <button
+                    className="btn btn-block btn-info"
+                    style={{ cursor: 'pointer' }}
+                    type="submit"
+                >
+                    Submit
+                </button>
 
-                </Form>
+            </Form>
 
 
-                {error && (
-                    <div className="my-3 p-3 bg-danger text-white">
-                        {error.message}
-                    </div>
-                )}
+            {error && (
+                <div className="my-3 p-3 bg-danger text-white">
+                    {error.message}
+                </div>
+            )}
 
-            </>
-            )
+        </>
+    )
 }
 
-            export default AddVeggieForm
+export default AddVeggieForm

@@ -17,11 +17,9 @@ export default function OutgoingRequests({ sentRequests }) {
                         <div className="request-meta">
                             <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" />
                             <p className="sender-meta"><strong>{request.veggie.owner.username}</strong><br></br><span className="message-timestamp">{moment(request.timestamp).fromNow()}</span></p>
-                            <p className="snippet">{request.responses.length ? request.responses[request.responses.length - 1].content : request.content}
-                                {console.log(request.content)}</p>
+                            <p className="snippet">{request.responses.length ? request.responses[request.responses.length - 1].content : request.content}</p>
                         </div>
                         <div>
-                            {console.log(request._id)}
                             <button className="respond-btn" id={request._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
                                 <Link to={`/requests/${request._id}`}>
                                     Respond

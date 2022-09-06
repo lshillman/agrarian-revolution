@@ -34,8 +34,6 @@ const EditVeggieForm = ({veggie}) => {
             const owner = localStorage.getItem('_id');
             const quantity = formState.quantity * 1
 
-            console.log({ ...formState, owner })
-            console.log(formState)
             await updateVeggie({
                 variables: { ...formState, owner, quantity, _id: veggie._id },
             });

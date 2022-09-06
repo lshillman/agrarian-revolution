@@ -11,7 +11,6 @@ import EditVeggieModal from "../components/EditVeggieModal";
 export default function MyVeggies() {
     const { loading, data } = useQuery(QUERY_USER, { variables: { _id: localStorage.getItem('_id') } });
     const veggies = data?.user[0].veggies || [];
-    console.log(data);
     const [deleteVeggie] = useMutation(DELETE_VEGGIE);
 
     // window.addEventListener('click', (e) => {
