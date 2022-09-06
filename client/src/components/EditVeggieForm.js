@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { UPDATE_VEGGIE } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 import { Form } from 'react-bootstrap';
-import VeggieResponses from './VeggieResponses';
-
 
 const EditVeggieForm = ({veggie}) => {
 
@@ -34,8 +32,6 @@ const EditVeggieForm = ({veggie}) => {
             const owner = localStorage.getItem('_id');
             const quantity = formState.quantity * 1
 
-            console.log({ ...formState, owner })
-            console.log(formState)
             await updateVeggie({
                 variables: { ...formState, owner, quantity, _id: veggie._id },
             });

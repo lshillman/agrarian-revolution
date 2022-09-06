@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Search from './pages/Search';
 import MyVeggies from './pages/MyVeggies';
 import Requests from './pages/Requests';
-import Conversation from './pages/Conversation';
 import Profile from './pages/Profile';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
-import AddVeggieForm from './components/AddVeggieForm';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
 import Header from './components/Header';
 import Footer from './components/Footer';

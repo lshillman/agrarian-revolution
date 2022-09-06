@@ -35,7 +35,6 @@ const SignupForm = () => {
             const { data } = await createUser({
                 variables: { ...formState, location },
             });
-            console.log(data.createUser.user);
 
             localStorage.setItem("_id", data.createUser.user._id);
             localStorage.setItem("username", data.createUser.user.username);

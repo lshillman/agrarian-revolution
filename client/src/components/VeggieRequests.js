@@ -10,13 +10,9 @@ import auth from "../utils/auth";
 
 export default function VeggiesRequests() {
     const { requestId } = useParams();
-    console.log(requestId)
 
     const { loading, data, error } = useQuery(QUERY_REQUEST, { variables: { _id: requestId } });
     const request = data?.request || [];
-    // console.log(request)
-    console.log(loading)
-    console.log(data)
     if (error) console.error(error)
 
     // Mutation to populate a request's array of responses
