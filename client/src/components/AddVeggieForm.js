@@ -29,18 +29,23 @@ const AddVeggieForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const owner = localStorage.getItem('_id');
-            const location = localStorage.getItem('location');
-            const coordinates = JSON.parse(localStorage.getItem('coordinates'));
-            const quantity = formState.quantity * 1 === 0 ? 1 : formState.quantity * 1;
+        if (formState.type && formState.quantity && formState.description) {
 
-            await createVeggie({
-                variables: { ...formState, owner, location, coordinates, quantity },
-            });
-            window.location.reload();
-        } catch (e) {
-            console.error(e);
+            try {
+                const owner = localStorage.getItem('_id');
+                const location = localStorage.getItem('location');
+                const coordinates = JSON.parse(localStorage.getItem('coordinates'));
+                const quantity = formState.quantity * 1 === 0 ? 1 : formState.quantity * 1;
+
+                await createVeggie({
+                    variables: { ...formState, owner, location, coordinates, quantity },
+                });
+                window.location.reload();
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            document.getElementById("add-veggie-fields").style.display = "block"
         }
 
     };
@@ -121,6 +126,9 @@ const AddVeggieForm = () => {
                     value={formState.description}
                     onChange={handleChange}
                 />
+                <div style={{ display: "none" }} id="add-veggie-fields" className="my-3 p-3 bg-danger text-white">
+                    Please fill out all required fields
+                </div>
                 <button
                     className="button-primary"
                     style={{ cursor: 'pointer' }}
