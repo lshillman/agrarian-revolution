@@ -41,14 +41,11 @@ const Search = () => {
 
   return (
     <>
-      <div id="top">
+      <main id="search-pg" >
         <div id="top-search">
           <h2>Veggies Near You</h2>
           <PostVeggieModal />
         </div>
-      </div>
-
-      <main id="search-pg" >
         {loading ? (
           <div>Loading...</div>
         ) : (
@@ -61,8 +58,8 @@ const Search = () => {
               <div style={{ flexBasis: "75%" }}>
                 <MapContainer center={userCoords || [37.87114171034828, -122.27379801035863]} zoom={13} style={{ height: "500px" }} whenCreated={(map) => mapRef.current = map}>
                   <TileLayer
-                    attribution='Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-                    url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                   />
 
                   {veggies.map((veggie, key) => {
