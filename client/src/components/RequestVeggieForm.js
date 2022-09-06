@@ -60,7 +60,7 @@ const RequestVeggieForm = ({ veggie }) => {
                             value={formState.content}
                             onChange={handleChange}
                         />
-                        <div id="request-fields" className="my-3 p-3 bg-danger text-white">
+                        <div style={{ display: "none" }} id="request-fields" className="my-3 p-3 bg-danger text-white">
                             Please write a message
                         </div>
                         <button
