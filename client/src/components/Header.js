@@ -43,7 +43,7 @@ export default function Header() {
                 </Navbar.Collapse>
             </Container>
             <Modal
-                size='lg'
+                size='md'
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 aria-labelledby='signup-modal'>

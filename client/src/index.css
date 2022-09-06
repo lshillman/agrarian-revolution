@@ -327,6 +327,18 @@ footer {
 
 /* ========== MODALS ==========*/
 
+#signup-modal .navbar-nav {
+    flex-direction: row;
+    gap: 2rem;
+}
+
+#signup-modal .nav-item .nav-link.active {
+    background-color: transparent;
+    border-radius: 0;
+    box-sizing: border-box;
+    border-bottom: 5px solid #70b603;
+}
+
 
 #request-veggie-form textarea {
     width: 100%;
@@ -339,8 +351,9 @@ footer {
 #add-veggie-form input,
 #add-veggie-form textarea,
 #edit-veggie-form input,
-#edit-veggie-form textarea
-#login-form input {
+#edit-veggie-form textarea,
+#login-form input,
+#signup-form input {
     width: 100%;
     border: 1px solid #ccc;
     border-radius: 8px;

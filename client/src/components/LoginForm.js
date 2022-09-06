@@ -51,11 +51,11 @@ const LoginForm = ({setUserInfo, userInfo}) => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+    <>
+      
+        
+          
+          
             {data ? (
               <p>
                 Success! You may now head{' '}
@@ -65,13 +65,15 @@ const LoginForm = ({setUserInfo, userInfo}) => {
               <>
                 {!localStorage.getItem('id_token') && localStorage.getItem('username') ? <div className='expired-message'>Your session has expired. Please log in again.</div> : ''}
                 <form id="login-form" onSubmit={handleFormSubmit}>
+                  <label for="email">Your email</label>
                   <input
-                    placeholder="Your email"
+                    placeholder="e.g., bob@example.com"
                     name="email"
                     type="email"
                     value={formState.email}
                     onChange={handleChange}
                   />
+                  <label for="password">Password</label>
                   <input
                     placeholder="******"
                     name="password"
@@ -84,7 +86,7 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >
-                    Submit
+                    Log in
                   </button>
                 </form>
               </>
@@ -95,10 +97,10 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                 {error.message}
               </div>
             )}
-          </div>
-        </div>
-      </div>
-    </main>
+          
+       
+      
+    </>
   );
 };
 
