@@ -13,6 +13,11 @@ header {
     margin: 0 auto;
 }
 
+.container-fluid {
+    max-width: 1200px;
+    padding: 0;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
@@ -286,3 +291,26 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+
+
+/* ========== MOBILE ==========*/
+
+@media screen and (max-width: 768px) {
+
+    nav a {
+        font-size: 1.2rem;
+        line-height: 2rem;
+    }
+
+    #nav-links a {
+        width:100%;
+        flex-basis:100%;
+        text-align: center;
+    }
+
+    #auth-buttons {
+        margin-top: 4rem;
+    }
+    
+  }
