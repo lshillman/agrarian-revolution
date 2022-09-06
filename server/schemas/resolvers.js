@@ -148,6 +148,8 @@ const resolvers = {
             return veggie;
         },
         deleteVeggie: async (parent, { _id }) => {
+            // to the veggies owner and remove from their veggies list
+            // veggies requestor, in their sent requests list
             const veggie = await Veggie.findOneAndDelete(
                 { _id },
                 { new: true }

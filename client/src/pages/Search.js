@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useQuery } from '@apollo/client';
 import VeggiesList from '../components/VeggiesList';
 import VeggiePopup from '../components/VeggiePopup';

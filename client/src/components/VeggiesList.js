@@ -3,7 +3,7 @@ import moment from 'moment';
 import icons from "../utils/icons";
 
 const VeggiesList = ({ veggies, onClickShowMarker, userUsername }) => {
-    if (!veggies?.length) {
+    if (veggies.filter((veggie) => (veggie.owner.username !== userUsername)).length === 0) {
         return <h3>No veggies yet</h3>;
     }
 

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { UPDATE_VEGGIE } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 import { Form } from 'react-bootstrap';
-import VeggieResponses from './VeggieResponses';
-
 
 const EditVeggieForm = ({veggie}) => {
 

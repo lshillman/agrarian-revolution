@@ -12,13 +12,7 @@ export default function MyVeggies() {
     const { loading, data } = useQuery(QUERY_USER, { variables: { _id: localStorage.getItem('_id') } });
     const veggies = data?.user[0].veggies || [];
     const [deleteVeggie] = useMutation(DELETE_VEGGIE);
-
-    // window.addEventListener('click', (e) => {
-    //     if (e.target.className != "confirm-delete" && document.getElementsByClassName('confirm-delete')) {
-    //         document.querySelectorAll(".delete-veggie-btn").forEach((button) => button.style.display = "block");
-    //         document.querySelectorAll(".confirm-delete").forEach((button) => button.style.display = "none");
-    //     }
-    // })
+    console.log(data)
 
 
     const handleVeggieDelete = async (id) => {
