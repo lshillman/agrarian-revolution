@@ -29,6 +29,9 @@ const SignupForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        if(formState.username && formState.password
+        && formState.email && formState.location && formState.coordinates)
+
         try {
             const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
 
@@ -41,6 +44,7 @@ const SignupForm = () => {
             localStorage.setItem("email", data.createUser.user.email);
             localStorage.setItem("location", data.createUser.user.location);
             localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
+
 
             Auth.login(data.createUser.token);
         } catch (e) {
