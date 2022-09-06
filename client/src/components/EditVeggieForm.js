@@ -46,7 +46,7 @@ const EditVeggieForm = ({veggie}) => {
     return (
         <>
             <Form id="edit-veggie-form" onSubmit={handleFormSubmit}>
-            <label for="quantity">How many?</label>
+            <label htmlFor="quantity">How many?</label>
                 <input
                     className="form-input"
                     placeholder="quantity"
@@ -56,7 +56,7 @@ const EditVeggieForm = ({veggie}) => {
                     onChange={handleChange}
                 />
 
-            <label for="photo">Paste a link to a photo (optional)</label>
+            <label htmlFor="photo">Paste a link to a photo (optional)</label>
                 <input
                     className="form-input"
                     placeholder="photo"
@@ -66,7 +66,7 @@ const EditVeggieForm = ({veggie}) => {
                     onChange={handleChange}
                 />
 
-            <label for="type">Short description</label>
+            <label htmlFor="type">Short description</label>
                 <textarea
                     className="form-input"
                     placeholder="description"

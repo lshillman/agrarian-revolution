@@ -62,7 +62,7 @@ const SignupForm = () => {
                 </p>
             ) : (
                 <form id="signup-form" onSubmit={handleFormSubmit}>
-                    <label for="username">Choose a public username</label>
+                    <label htmlFor="username">Choose a public username</label>
                     <input
                         className="form-input"
                         placeholder="e.g., veggiebob"
@@ -71,7 +71,7 @@ const SignupForm = () => {
                         value={formState.username}
                         onChange={handleChange}
                     />
-                    <label for="email">Your email address</label>
+                    <label htmlFor="email">Your email address</label>
                     <input
                         className="form-input"
                         placeholder="bob@example.com"
@@ -80,7 +80,7 @@ const SignupForm = () => {
                         value={formState.email}
                         onChange={handleChange}
                     />
-                    <label for="password">Choose a secure password</label>
+                    <label htmlFor="password">Choose a secure password</label>
                     <input
                         className="form-input"
                         placeholder="******"
@@ -89,7 +89,7 @@ const SignupForm = () => {
                         value={formState.password}
                         onChange={handleChange}
                     />
-                    <label for="street">What's the name of your street?<br />(Just the street. Please do NOT include your house number)</label>
+                    <label htmlFor="street">What's the name of your street?<br />(Just the street. Please do NOT include your house number)</label>
                     <input
                         className="form-input"
                         placeholder="street"
@@ -98,7 +98,7 @@ const SignupForm = () => {
                         value={formState.street}
                         onChange={handleChange}
                     />
-                    <label for="crossStreet">What's the nearest cross street?</label>
+                    <label htmlFor="crossStreet">What's the nearest cross street?</label>
                     <input
                         className="form-input"
                         placeholder="cross street"
@@ -107,7 +107,7 @@ const SignupForm = () => {
                         value={formState.crossStreet}
                         onChange={handleChange}
                     />
-                    <label for="zipcode">Your ZIP code</label>
+                    <label htmlFor="zipcode">Your ZIP code</label>
                     <input
                         className="form-input"
                         placeholder="zip code"

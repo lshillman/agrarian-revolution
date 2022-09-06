@@ -48,7 +48,7 @@ const AddVeggieForm = () => {
     return (
         <>
             <Form id="add-veggie-form" onSubmit={handleFormSubmit}>
-                <label for="type">What kind of veggie?</label>
+                <label htmlFor="type">What kind of veggie?</label>
                 <select name='type' onChange={handleChange}>
                     <option>select one</option>
                     <option value="apples">apples</option>
@@ -94,7 +94,7 @@ const AddVeggieForm = () => {
                     <option value="tomatoes">tomatoes</option>
                     <option value="turnips">turnips</option>
                 </select>
-                <label for="quantity">How many?</label>
+                <label htmlFor="quantity">How many?</label>
                 <input
                     className="form-input"
                     placeholder="quantity"
@@ -103,7 +103,7 @@ const AddVeggieForm = () => {
                     value={formState.quantity}
                     onChange={handleChange}
                 />
-                <label for="photo">Paste a link to a photo (optional)</label>
+                <label htmlFor="photo">Paste a link to a photo (optional)</label>
                 <input
                     className="form-input"
                     placeholder="photo"
@@ -112,7 +112,7 @@ const AddVeggieForm = () => {
                     value={formState.photo}
                     onChange={handleChange}
                 />
-                <label for="description">Short description</label>
+                <label htmlFor="description">Short description</label>
                 <textarea
                     className="form-input"
                     placeholder="description"
