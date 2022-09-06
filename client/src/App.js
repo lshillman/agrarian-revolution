@@ -51,22 +51,22 @@ function App() {
           />
           <Route
             path="/veggies"
-            element={auth.loggedIn() ? <MyVeggies /> : <LoginForm />}
+            element={auth.loggedIn() ? <MyVeggies /> : <Landing />}
             // element={<MyVeggies />}
           />
           <Route
             path="/requests"
-            element={auth.loggedIn() ? <Requests /> : <LoginForm />}
+            element={auth.loggedIn() ? <Requests /> : <Landing />}
             // element={<Requests />}
           />
           <Route
             path="/requests/:requestId"
-            element={auth.loggedIn() ? <VeggiesRequests /> : <LoginForm />}
+            element={auth.loggedIn() ? <VeggiesRequests /> : <Landing />}
             // element={<VeggiesRequests />}
           />
           <Route
             path="/profile/:username"
-            element={auth.loggedIn() ? <Profile /> : <LoginForm />}
+            element={auth.loggedIn() ? <Profile /> : <Landing />}
             // element={<Profile />}
           />
           <Route
