@@ -50,7 +50,7 @@ const SignupForm = () => {
             } catch (e) {
                 console.error(e);
             }
-        } else {
+        } else { document.getElementById("all-fields").style.display="block"
 
         }
     };
@@ -120,7 +120,7 @@ const SignupForm = () => {
                         onChange={handleChange}
                     />
 
-                    <div className="my-3 p-3 bg-danger text-white">
+                    <div style = {{display: "none"}} id="all-fields" className="my-3 p-3 bg-danger text-white">
                         All fields required
                     </div>
 
