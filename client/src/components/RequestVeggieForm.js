@@ -28,18 +28,22 @@ const RequestVeggieForm = ({ veggie }) => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const content = formState.content;
-            const requestor = localStorage.getItem('_id');
+        if (formState.content) {
 
-            await createRequest({
-                variables: { content, veggie: veggie._id, requestor },
-            });
-            window.location.reload();
-        } catch (e) {
-            console.error(e);
+            try {
+                const content = formState.content;
+                const requestor = localStorage.getItem('_id');
+
+                await createRequest({
+                    variables: { content, veggie: veggie._id, requestor },
+                });
+                window.location.reload();
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            document.getElementById("request-fields").style.display = "block"
         }
-
     };
 
 
@@ -56,7 +60,9 @@ const RequestVeggieForm = ({ veggie }) => {
                             value={formState.content}
                             onChange={handleChange}
                         />
-
+                        <div id="request-fields" className="my-3 p-3 bg-danger text-white">
+                            Please write a message
+                        </div>
                         <button
                             className="button-primary"
                             style={{ cursor: 'pointer' }}
