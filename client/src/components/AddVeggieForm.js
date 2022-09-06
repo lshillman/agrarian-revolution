@@ -36,9 +36,11 @@ const AddVeggieForm = () => {
                 const location = localStorage.getItem('location');
                 const coordinates = JSON.parse(localStorage.getItem('coordinates'));
                 const quantity = formState.quantity * 1 === 0 ? 1 : formState.quantity * 1;
+                const photo = document.getElementById("upload-url").value;
+                console.log(photo);
 
                 await createVeggie({
-                    variables: { ...formState, owner, location, coordinates, quantity },
+                    variables: { ...formState, owner, location, coordinates, quantity, photo },
                 });
                 window.location.reload();
             } catch (e) {
@@ -49,6 +51,27 @@ const AddVeggieForm = () => {
         }
 
     };
+
+    var myWidget = window.cloudinary.createUploadWidget({
+        cloudName: 'agrarify',
+        uploadPreset: 'agrarify'
+    }, (error, result) => {
+        if (!error && result && result.event === "success") {
+            console.log('Done! Here is the image info: ', result.info.url);
+            const urlInfo = result.info.url;
+            const uploadUrl = document.getElementById("upload-url");
+            uploadUrl.value = urlInfo;
+            setFormState({
+                ...formState,
+                ['photo']: uploadUrl.value
+            });
+        }
+    }
+    )
+
+    const showUploadWidget = () => {
+        myWidget.open();
+    }
 
     return (
         <>
@@ -108,15 +131,21 @@ const AddVeggieForm = () => {
                     value={formState.quantity}
                     onChange={handleChange}
                 />
-                <label htmlFor="photo">Paste a link to a photo (optional)</label>
-                <input
-                    className="form-input"
-                    placeholder="photo"
-                    name="photo"
-                    type="text"
-                    value={formState.photo}
-                    onChange={handleChange}
-                />
+                <div id="photos-upload">
+                    <div>
+                        <label htmlFor="photo">Upload a photo (optional)</label>
+                        <input id="upload-url"
+                            className="form-input"
+                            placeholder="photo"
+                            name="photo"
+                            type="text"
+                            value={formState.photo}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <label id="upload_widget" class="cloudinary-button" onClick={showUploadWidget}>Upload Photo</label>
+                </div>
+
                 <label htmlFor="description">Short description</label>
                 <textarea
                     className="form-input"
