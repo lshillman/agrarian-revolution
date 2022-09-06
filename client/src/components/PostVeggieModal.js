@@ -12,7 +12,7 @@ export default function PostVeggieModal() {
             {auth.loggedIn() ? (
                 <>
                     <Modal
-                        size='lg'
+                        size='md'
                         show={showPostModal}
                         onHide={() => setShowPostModal(false)}
                         aria-labelledby='veggie-modal'>

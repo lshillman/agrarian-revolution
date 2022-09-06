@@ -14,13 +14,13 @@ const VeggiePopup = ({ veggie }) => {
     return (
         <>
             <Modal
-                size='lg'
+                size='md'
                 show={showReqModal}
                 onHide={() => setShowReqModal(false)}
                 aria-labelledby='veggie-modal'>
 
                 <Modal.Header closeButton>
-                    <Modal.Title>Post a Veggie</Modal.Title>
+                    <Modal.Title>Request {veggie.type}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <RequestVeggieForm handleModalClose={() => setShowReqModal(false)} veggie={veggie} />
