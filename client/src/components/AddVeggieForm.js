@@ -131,16 +131,21 @@ const AddVeggieForm = () => {
                     value={formState.quantity}
                     onChange={handleChange}
                 />
-                <label htmlFor="photo">Paste a link to a photo (optional)</label>
-                <input id="upload-url"
-                    className="form-input"
-                    placeholder="photo"
-                    name="photo"
-                    type="text"
-                    value={formState.photo}
-                    onChange={handleChange}
-                />
-                <label id="upload_widget" class="cloudinary-button" onClick={showUploadWidget}>Upload files</label>
+                <div id="photos-upload">
+                    <div>
+                        <label htmlFor="photo">Upload a photo (optional)</label>
+                        <input id="upload-url"
+                            className="form-input"
+                            placeholder="photo"
+                            name="photo"
+                            type="text"
+                            value={formState.photo}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <label id="upload_widget" class="cloudinary-button" onClick={showUploadWidget}>Upload Photo</label>
+                </div>
+
                 <label htmlFor="description">Short description</label>
                 <textarea
                     className="form-input"
