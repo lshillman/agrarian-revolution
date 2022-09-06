@@ -27,13 +27,12 @@ export default function Header() {
                 <Navbar.Collapse id="navbarScroll">
                     <Nav className="mx-auto my-2 my-lg-0 justify-content-between w-100 align-items-center">
                         <div></div>
-                        <div id="nav-links"
+                        {Auth.loggedIn() && <div id="nav-links"
                             style={{ maxHeight: '100px', display: 'flex', flexWrap: 'wrap', gap: '1.5rem' }}>
                             <Link to="/">Find Veggies</Link>
                             <Link to="/veggies">My Veggies</Link>
                             <Link to="/requests">Requests</Link>
-
-                        </div>
+                        </div>}
                         <div id="auth-buttons">
                             {Auth.loggedIn() && <button id="logout-btn" onClick={logout}>Logout</button>}
                             {!Auth.loggedIn() && <button id="login-signup-btn" onClick={() => setShowModal(true)}>Login/Signup</button>}
