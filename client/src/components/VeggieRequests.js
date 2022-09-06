@@ -25,17 +25,21 @@ export default function VeggiesRequests() {
     // Populate database with the newly-created response
     const sendResponse = async (e) => {
         e.preventDefault();
-        try {
-            await createResponse({
-                variables: { _id: requestId, content: response, sender: localStorage.getItem('_id') }
-            })
+        if (response) {
 
-            setResponse("");
-            ref.current.value = "";
-            window.location.reload();
-        } catch (e) {
-            console.error(e)
+            try {
+                await createResponse({
+                    variables: { _id: requestId, content: response, sender: localStorage.getItem('_id') }
+                })
+
+                setResponse("");
+                ref.current.value = "";
+                window.location.reload();
+            } catch (e) {
+                console.error(e)
+            }
         }
+
     }
 
     return (
@@ -63,7 +67,7 @@ export default function VeggiesRequests() {
                                     {auth.loggedIn() ? (
                                         <form className="response-form" onSubmit={(e) => sendResponse(e)}>
                                             {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
-                                            <button>Send</button>
+                                            <button id="send-request-btn">Send</button>
                                         </form>
                                     ) : window.location.replace('/')}
                                 </div>

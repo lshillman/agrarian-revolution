@@ -29,22 +29,29 @@ const SignupForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
+        if (formState.username && formState.password
+            && formState.email && formState.street && formState.crossStreet && formState.zipcode) {
 
-            const { data } = await createUser({
-                variables: { ...formState, location },
-            });
+            try {
+                const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
 
-            localStorage.setItem("_id", data.createUser.user._id);
-            localStorage.setItem("username", data.createUser.user.username);
-            localStorage.setItem("email", data.createUser.user.email);
-            localStorage.setItem("location", data.createUser.user.location);
-            localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
+                const { data } = await createUser({
+                    variables: { ...formState, location },
+                });
 
-            Auth.login(data.createUser.token);
-        } catch (e) {
-            console.error(e);
+                localStorage.setItem("_id", data.createUser.user._id);
+                localStorage.setItem("username", data.createUser.user.username);
+                localStorage.setItem("email", data.createUser.user.email);
+                localStorage.setItem("location", data.createUser.user.location);
+                localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
+
+
+                Auth.login(data.createUser.token);
+            } catch (e) {
+                console.error(e);
+            }
+        } else { document.getElementById("all-fields").style.display="block"
+
         }
     };
 
@@ -58,7 +65,7 @@ const SignupForm = () => {
                 </p>
             ) : (
                 <form id="signup-form" onSubmit={handleFormSubmit}>
-                    <label for="username">Choose a public username</label>
+                    <label htmlFor="username">Choose a public username</label>
                     <input
                         className="form-input"
                         placeholder="e.g., veggiebob"
@@ -67,7 +74,7 @@ const SignupForm = () => {
                         value={formState.username}
                         onChange={handleChange}
                     />
-                    <label for="email">Your email address</label>
+                    <label htmlFor="email">Your email address</label>
                     <input
                         className="form-input"
                         placeholder="bob@example.com"
@@ -76,7 +83,7 @@ const SignupForm = () => {
                         value={formState.email}
                         onChange={handleChange}
                     />
-                    <label for="password">Choose a secure password</label>
+                    <label htmlFor="password">Choose a secure password</label>
                     <input
                         className="form-input"
                         placeholder="******"
@@ -85,7 +92,7 @@ const SignupForm = () => {
                         value={formState.password}
                         onChange={handleChange}
                     />
-                    <label for="street">What's the name of your street?<br />(Just the street. Please do NOT include your house number)</label>
+                    <label htmlFor="street">What's the name of your street?<br />(Just the street. Please do NOT include your house number)</label>
                     <input
                         className="form-input"
                         placeholder="street"
@@ -94,7 +101,7 @@ const SignupForm = () => {
                         value={formState.street}
                         onChange={handleChange}
                     />
-                    <label for="crossStreet">What's the nearest cross street?</label>
+                    <label htmlFor="crossStreet">What's the nearest cross street?</label>
                     <input
                         className="form-input"
                         placeholder="cross street"
@@ -103,7 +110,7 @@ const SignupForm = () => {
                         value={formState.crossStreet}
                         onChange={handleChange}
                     />
-                    <label for="zipcode">Your ZIP code</label>
+                    <label htmlFor="zipcode">Your ZIP code</label>
                     <input
                         className="form-input"
                         placeholder="zip code"
@@ -113,6 +120,10 @@ const SignupForm = () => {
                         onChange={handleChange}
                     />
 
+                    <div style = {{display: "none"}} id="all-fields" className="my-3 p-3 bg-danger text-white">
+                        All fields required
+                    </div>
+
                     <button
                         className="button-primary"
                         style={{ cursor: 'pointer' }}
@@ -120,6 +131,7 @@ const SignupForm = () => {
                     >
                         Create account
                     </button>
+
                 </form>
             )}
 
