@@ -44,21 +44,25 @@ export default function MyVeggies() {
                         </div>
                     </div>
                     {veggies.map((veggie, i) => {
-                        return <div className="single-veggie" key={i}>
-                            <div className="veggie-meta">
-                                <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
-                                <div>
-                                    <h4>{veggie.type}</h4>
-                                    <span className="timestamp">Qty: {veggie.quantity.toLocaleString()} • {moment(veggie.postedDate).fromNow()}</span>
-                                    <p className="veggie-desc">{veggie.description}</p>
+                        return (
+                            <div className="single-veggie" key={i}>
+                                <div className="veggie-meta">
+                                    <img src={icons[veggie.type].options.iconUrl} alt="veggie icon" />
+                                    <div>
+                                        <h4>{veggie.type}</h4>
+                                        <span className="timestamp">Qty: {veggie.quantity.toLocaleString()} • {moment(veggie.postedDate).fromNow()}</span>
+                                        <p className="veggie-desc">{veggie.description}</p>
+                                    </div>
+                                    {veggie.photo ? <img src={veggie.photo} alt="user's veggie" /> : <></>}
                                 </div>
-                                {veggie.photo ? <img src={veggie.photo} alt="user's veggie" /> : <></>}
-                            </div>
-                            <EditVeggieModal veggie={veggie} />
-                            <DeleteBtn veggieDelete={() => handleVeggieDelete(veggie._id)} />
-                            {/* <button className="delete-veggie-btn" onClick={handleDeleteButton}>Delete</button>
+                                <div className="veggie-actions">
+                                    <EditVeggieModal veggie={veggie} />
+                                    <DeleteBtn veggieDelete={() => handleVeggieDelete(veggie._id)} />
+                                </div>
+                                {/* <button className="delete-veggie-btn" onClick={handleDeleteButton}>Delete</button>
                             <button className="confirm-delete" style={{ display: 'none', backgroundColor: 'red' }} onClick={() => handleVeggieDelete(veggie._id)} >Confirm</button> */}
-                        </div>
+                            </div>
+                        )
                     })}
                 </div>)
             }

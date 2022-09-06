@@ -103,6 +103,11 @@ main {
     flex-basis: 25%;
 }
 
+.veggie-actions {
+    display: flex;
+    gap: 1rem;
+}
+
 #leaflet-map {
     flex-basis: 75%;
 }
