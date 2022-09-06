@@ -13,6 +13,11 @@ header {
     margin: 0 auto;
 }
 
+.container-fluid {
+    max-width: 1200px;
+    padding: 0 0.5rem;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
@@ -49,6 +54,36 @@ button  {
     color: white;
 }
 
+.button-primary {
+    background-color: #70b603;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+}
+
+.button-primary a, .button-primary a:hover {
+    color:white;
+}
+
+.button-primary:hover {
+    background-color: #518400;
+    color: white;
+}
+
+.button-secondary {
+    background-color: transparent;
+    border: 1px solid #518400;
+    padding: 10px;
+    border-radius: 8px;
+    color: #518400;
+}
+
+.button-secondary:hover {
+    background-color: #e5ffbb;
+    color: #518400;
+}
+
 
 button a {
     text-decoration: none;
@@ -70,8 +105,10 @@ button a {
 #top-search {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-direction: row;
-    width: 1200px;
+    padding-bottom: 1.5rem;
+    width: 100%;
 }
 
 #top-search button {
@@ -84,7 +121,7 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     min-height: calc(100vh - 13rem);
-    padding: 2rem 0;
+    padding: 2rem 0.5rem;
 }
 
 #map-veg {
@@ -96,15 +133,13 @@ main {
     flex-basis: 25%;
 }
 
-#leaflet-map {
-    flex-basis: 75%;
+.veggie-actions {
+    display: flex;
+    gap: 1rem;
 }
 
-#top {
-    display: flex;
-    margin-top: 20px;
-    flex-direction: row;
-    justify-content: center;
+#leaflet-map {
+    flex-basis: 75%;
 }
 
 .veggie-list-item {
@@ -117,6 +152,22 @@ main {
 
 .veggie-list-item:hover {
     background-color: #EEF3F9
+}
+
+.radios .radio{
+    cursor:pointer
+}
+
+.radios label {
+    width: 100%;
+}
+
+.radios input[type=radio]{
+    display:none
+}
+
+.radios input[type=radio]:checked + .radio{
+    background-color:#E8FACD
 }
 
 .veggie-list-item img {
@@ -270,3 +321,79 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+
+
+
+/* ========== MODALS ==========*/
+
+#signup-modal .navbar-nav {
+    flex-direction: row;
+    gap: 2rem;
+}
+
+#signup-modal .nav-item .nav-link.active {
+    background-color: transparent;
+    border-radius: 0;
+    box-sizing: border-box;
+    border-bottom: 5px solid #70b603;
+}
+
+
+#request-veggie-form textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+#add-veggie-form input,
+#add-veggie-form textarea,
+#edit-veggie-form input,
+#edit-veggie-form textarea,
+#login-form input,
+#signup-form input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#add-veggie-form select {
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+
+
+
+
+/* ========== MOBILE ==========*/
+
+@media screen and (max-width: 768px) {
+    nav a {
+        font-size: 1.2rem;
+        line-height: 2rem;
+    }
+
+    #nav-links a {
+        width:100%;
+        flex-basis:100%;
+        text-align: center;
+    }
+
+    #auth-buttons {
+        margin-top: 4rem;
+    }
+
+    #map-veg {
+        flex-direction: column-reverse;
+
+    }
+    
+  }

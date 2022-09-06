@@ -3,11 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Search from './pages/Search';
 import MyVeggies from './pages/MyVeggies';
 import Requests from './pages/Requests';
-import Conversation from './pages/Conversation';
 import Profile from './pages/Profile';
 import SignupForm from './components/SignupForm';
+import Landing from './pages/Landing';
 import LoginForm from './components/LoginForm';
-import AddVeggieForm from './components/AddVeggieForm';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -42,42 +41,49 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-          <Routes>
-            <Route
-              path="/"
-              element={<Search/>}
-            />
-            <Route
-              path="/veggies"
-              element={<MyVeggies/>}
-            />
-            <Route
-              path="/requests"
-              element={<Requests/>}
-            />
-            <Route
-              path="/requests/:requestId"
-              element={<VeggiesRequests />}
-            />
-            <Route
-              path="/profile/:username"
-              element={<Profile/>}
-            />
-            <Route
-              path="/signup"
-              element={<SignupForm/>}
-            />
-            <Route
-              path="/login"
-              element={<LoginForm />}
-            />
-            <Route
-              path="/*"
-              element={<Navigate replace to="/" />}
-            />
-          </Routes>
-          <Footer />
-        </Router>
+        <Routes>
+          <Route
+            path="/"
+            // TODO: replace the else w pretty page
+            element={auth.loggedIn() ? <Search /> : <Landing />}
+            // element={<Search />}
+            // onEnter={requireAuth}
+          />
+          <Route
+            path="/veggies"
+            element={auth.loggedIn() ? <MyVeggies /> : <LoginForm />}
+            // element={<MyVeggies />}
+          />
+          <Route
+            path="/requests"
+            element={auth.loggedIn() ? <Requests /> : <LoginForm />}
+            // element={<Requests />}
+          />
+          <Route
+            path="/requests/:requestId"
+            element={auth.loggedIn() ? <VeggiesRequests /> : <LoginForm />}
+            // element={<VeggiesRequests />}
+          />
+          <Route
+            path="/profile/:username"
+            element={auth.loggedIn() ? <Profile /> : <LoginForm />}
+            // element={<Profile />}
+          />
+          <Route
+            path="/signup"
+            element={<SignupForm />}
+          />
+          <Route
+            path="/login"
+            element={<LoginForm />}
+          />
+          <Route
+            path="/*"
+            element={<Navigate replace to="/" />}
+          />
+        </Routes>
+        <Footer />
+      </Router>
     </ApolloProvider>
   );
 }

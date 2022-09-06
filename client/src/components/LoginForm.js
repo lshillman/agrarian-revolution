@@ -31,14 +31,6 @@ const LoginForm = ({setUserInfo, userInfo}) => {
         variables: { ...formState },
       });
 
-      // TODO: set all the user info
-      // setUserInfo({
-      //   _id: data.login.user._id,
-      //   username: data.login.user.username,
-      //   email: data.login.user.email,
-      //   location: data.login.user.location,
-      //   coordinates: data.login.user.coordinates
-      // })
       localStorage.setItem("_id", data.login.user._id);
       localStorage.setItem("username", data.login.user.username);
       localStorage.setItem("email", data.login.user.email);
@@ -59,42 +51,45 @@ const LoginForm = ({setUserInfo, userInfo}) => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+    <>
+      
+        
+          
+          
             {data ? (
               <p>
                 Success! You may now head{' '}
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
-              </form>
+              <>
+                {!localStorage.getItem('id_token') && localStorage.getItem('username') ? <div className='expired-message'>Your session has expired. Please log in again.</div> : ''}
+                <form id="login-form" onSubmit={handleFormSubmit}>
+                  <label for="email">Your email</label>
+                  <input
+                    placeholder="e.g., bob@example.com"
+                    name="email"
+                    type="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                  />
+                  <label for="password">Password</label>
+                  <input
+                    placeholder="******"
+                    name="password"
+                    type="password"
+                    value={formState.password}
+                    onChange={handleChange}
+                  />
+                  <button
+                    className="button-primary"
+                    style={{ cursor: 'pointer' }}
+                    type="submit"
+                  >
+                    Log in
+                  </button>
+                </form>
+              </>
             )}
 
             {error && (
@@ -102,10 +97,10 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                 {error.message}
               </div>
             )}
-          </div>
-        </div>
-      </div>
-    </main>
+          
+       
+      
+    </>
   );
 };
 

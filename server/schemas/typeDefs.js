@@ -65,7 +65,7 @@ const typeDefs = gql`
         createRequest(veggie: String, requestor: String, content: String): Request
         createResponse(_id: String!, content: String!, sender: String!): Request
         updateUser(_id: String, email: String, password: String, location: String, coordinates: [Float]): User
-        updateVeggie(type: String, owner: String, coordinates: [Float], photo: String, quantity: Int, description: String): Veggie
+        updateVeggie(_id: String!, type: String, owner: String, coordinates: [Float], photo: String, quantity: Int, description: String): Veggie
         deleteVeggie(_id: String): Veggie
         deleteUser(_id: String): User
         deleteRequest(_id: String): Request

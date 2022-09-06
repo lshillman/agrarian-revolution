@@ -13,9 +13,7 @@ const AddVeggieForm = () => {
         description: '',
     });
 
-    // removed {data}
     const [createVeggie, { error }] = useMutation(CREATE_VEGGIE)
-
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -35,10 +33,8 @@ const AddVeggieForm = () => {
             const owner = localStorage.getItem('_id');
             const location = localStorage.getItem('location');
             const coordinates = JSON.parse(localStorage.getItem('coordinates'));
-            const quantity = formState.quantity * 1
+            const quantity = formState.quantity * 1 === 0 ? 1 : formState.quantity * 1;
 
-            console.log({ ...formState, owner, location, coordinates })
-            console.log(formState)
             await createVeggie({
                 variables: { ...formState, owner, location, coordinates, quantity },
             });
@@ -49,28 +45,10 @@ const AddVeggieForm = () => {
 
     };
 
-    const [image, setImage] = useState("");
-    const [url, setUrl] = useState("");
-    const uploadImage = () => {
-        const data = new FormData()
-        data.append("file", image)
-        data.append("upload_preset", "tutorial")
-        data.append("cloud_name", "agrarify")
-        fetch("  https://api.cloudinary.com/v1_1/agrarify/image/upload", {
-            method: "post",
-            body: data
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                setUrl(data.url)
-            })
-            .catch(err => console.log(err))
-    }
-
-
     return (
         <>
             <Form id="add-veggie-form" onSubmit={handleFormSubmit}>
+                <label for="type">What kind of veggie?</label>
                 <select name='type' onChange={handleChange}>
                     <option>select one</option>
                     <option value="apples">apples</option>
@@ -79,7 +57,7 @@ const AddVeggieForm = () => {
                     <option value="avocados">avocados</option>
                     <option value="basil">basil</option>
                     <option value="drybeans">beans - dry</option>
-                    <option value="green">beans - green</option>
+                    <option value="greenbeans">beans - green</option>
                     <option value="beets">beets</option>
                     <option value="bokchoy">bok choy</option>
                     <option value="broccoli">broccoli</option>
@@ -116,6 +94,7 @@ const AddVeggieForm = () => {
                     <option value="tomatoes">tomatoes</option>
                     <option value="turnips">turnips</option>
                 </select>
+                <label for="quantity">How many?</label>
                 <input
                     className="form-input"
                     placeholder="quantity"
@@ -124,7 +103,7 @@ const AddVeggieForm = () => {
                     value={formState.quantity}
                     onChange={handleChange}
                 />
-
+                <label for="photo">Paste a link to a photo (optional)</label>
                 <input
                     className="form-input"
                     placeholder="photo"
@@ -133,8 +112,8 @@ const AddVeggieForm = () => {
                     value={formState.photo}
                     onChange={handleChange}
                 />
-
-                <input
+                <label for="description">Short description</label>
+                <textarea
                     className="form-input"
                     placeholder="description"
                     name="description"
@@ -143,26 +122,14 @@ const AddVeggieForm = () => {
                     onChange={handleChange}
                 />
                 <button
-                    className="btn btn-block btn-info"
+                    className="button-primary"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                 >
                     Submit
                 </button>
 
-                <div>
-                    <div>
-                        <input type="file" onChange={(e) => setImage(e.target.files[0])}></input>
-                        <button onClick={uploadImage}>Upload</button>
-                    </div>
-                    <div>
-                        <h1>Uploaded image will be displayed here</h1>
-                        <img src={url} />
-                    </div>
-                </div>
-
             </Form>
-
 
 
             {error && (

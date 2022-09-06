@@ -14,13 +14,13 @@ const VeggiePopup = ({ veggie }) => {
     return (
         <>
             <Modal
-                size='lg'
+                size='md'
                 show={showReqModal}
                 onHide={() => setShowReqModal(false)}
                 aria-labelledby='veggie-modal'>
 
                 <Modal.Header closeButton>
-                    <Modal.Title>Post a Veggie</Modal.Title>
+                    <Modal.Title>Request {veggie.type}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <RequestVeggieForm handleModalClose={() => setShowReqModal(false)} veggie={veggie} />
@@ -33,6 +33,7 @@ const VeggiePopup = ({ veggie }) => {
                     <h4>{veggie.type}</h4>
                     {Auth.loggedIn() ? <button onClick={() => setShowReqModal(true)}>Request</button> : <><Link to="/signup">Sign up</Link> to request this veggie!</>}
                     <p>{veggie.description}</p>
+                    <p>Qty: {veggie.quantity.toLocaleString()}</p>
                     {veggie.photo && <img src={veggie.photo} alt={veggie.type} style={{ width: "100%" }} />}
                     <p>Posted {moment(veggie.postedDate).fromNow()} by {veggie.owner.username}</p>
                 </div>

@@ -9,6 +9,14 @@ mutation createVeggie($type: String!, $owner: String!, $location: String!, $quan
 }
 `;
 
+export const UPDATE_VEGGIE = gql`
+mutation updateVeggie($_id: String!, $owner: String, $quantity: Int, $description: String, $photo: String) {
+  updateVeggie(_id: $_id, owner: $owner, quantity: $quantity, description: $description, photo: $photo){
+      _id
+  }
+}
+`;
+
 export const DELETE_VEGGIE = gql`
 mutation deleteVeggie($_id: String) {
   deleteVeggie(_id: $_id){

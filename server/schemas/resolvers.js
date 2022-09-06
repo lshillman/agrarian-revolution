@@ -28,7 +28,7 @@ const resolverMap = {
 const resolvers = {
     Query: {
         user: async (parent, { _id }) => {
-            return User.find({ _id: _id }).populate({
+            const user = await User.find({ _id: _id }).populate({
                 path: 'veggies',
                 populate: {
                     path: 'requests',
@@ -41,6 +41,8 @@ const resolvers = {
                     populate: 'owner'
                 }
             }).exec();
+            console.log(user)
+            return user;
         },
         veggies: async () => {
             const veggie = Veggie.find({}).populate({
@@ -85,7 +87,6 @@ const resolvers = {
                 const user = await User.create({ ...args, coordinates: coordinates });
                 const token = await signToken(user);
                 return { user, token };
-
             } catch (e) {
                 console.error(e)
             }
@@ -116,6 +117,7 @@ const resolvers = {
                 { _id: request.requestor._id },
                 { $addToSet: { sent_requests: request._id } },
             )
+            console.log(request)
             return request;
         },
         createResponse: async (parent, { _id, content, sender }) => {
@@ -146,6 +148,8 @@ const resolvers = {
             return veggie;
         },
         deleteVeggie: async (parent, { _id }) => {
+            // to the veggies owner and remove from their veggies list
+            // veggies requestor, in their sent requests list
             const veggie = await Veggie.findOneAndDelete(
                 { _id },
                 { new: true }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CREATE_REQUEST } from "../utils/mutations"
 import { useMutation } from "@apollo/client"
 import { Form } from 'react-bootstrap';
+import auth from '../utils/auth';
 
 
 const RequestVeggieForm = ({ veggie }) => {
@@ -44,33 +45,36 @@ const RequestVeggieForm = ({ veggie }) => {
 
     return (
         <>
-            <Form id="request-veggie-form" onSubmit={handleFormSubmit}>
-                <textarea
-                    className="form-input"
-                    placeholder={"Write a message to " + veggie.owner.username}
-                    name="content"
-                    type="text"
-                    value={formState.content}
-                    onChange={handleChange}
-                />
+            {auth.loggedIn() ? (
+                <>
+                    <Form id="request-veggie-form" onSubmit={handleFormSubmit}>
+                        <textarea
+                            className="form-input"
+                            placeholder={"Write a message to " + veggie.owner.username}
+                            name="content"
+                            type="text"
+                            value={formState.content}
+                            onChange={handleChange}
+                        />
 
-                <button
-                    className="btn btn-block btn-info"
-                    style={{ cursor: 'pointer' }}
-                    type="submit"
-                >
-                    Submit
-                </button>
+                        <button
+                            className="button-primary"
+                            style={{ cursor: 'pointer' }}
+                            type="submit"
+                        >
+                            Submit
+                        </button>
 
-            </Form>
+                    </Form>
 
 
-            {error && (
-                <div className="my-3 p-3 bg-danger text-white">
-                    {error.message}
-                </div>
-            )}
-
+                    {error && (
+                        <div className="my-3 p-3 bg-danger text-white">
+                            {error.message}
+                        </div>
+                    )}
+                </>
+            ) : window.location.replace('/')}
         </>
     )
 }
