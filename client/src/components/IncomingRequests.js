@@ -21,7 +21,7 @@ export default function IncomingRequests({ veggiesRequests }) {
                                     
                                     <p className="snippet">{req.responses.length ? req.responses[req.responses.length - 1].content : req.content}</p>
                                     </div>
-                                <button className="respond-btn" id={req._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
+                                <button className="respond-btn button-primary" id={req._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
                                     <Link to={`/requests/${req._id}`}>
                                         Respond
                                     </Link>

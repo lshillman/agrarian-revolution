@@ -5,6 +5,7 @@ import MyVeggies from './pages/MyVeggies';
 import Requests from './pages/Requests';
 import Profile from './pages/Profile';
 import SignupForm from './components/SignupForm';
+import Landing from './pages/Landing';
 import LoginForm from './components/LoginForm';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client"
 import Header from './components/Header';
@@ -44,7 +45,7 @@ function App() {
           <Route
             path="/"
             // TODO: replace the else w pretty page
-            element={auth.loggedIn() ? <Search /> : <LoginForm />}
+            element={auth.loggedIn() ? <Search /> : <Landing />}
             // element={<Search />}
             // onEnter={requireAuth}
           />

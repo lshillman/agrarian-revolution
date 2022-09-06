@@ -20,8 +20,8 @@ export default function DeleteBtn({ veggieDelete }) {
 
     return (
         <div className="delete-actions" style={{ display: "flex", gap: "1rem"}}>
-            <button className="delete-veggie-btn" onClick={handleDeleteButton}>Delete</button>
-            <button className="delete-veggie-btn" style={{ display: "none" }} onClick={cancelDelete}>Cancel</button>
+            <button className="delete-veggie-btn button-secondary" onClick={handleDeleteButton}>Delete</button>
+            <button className="button-secondary" style={{ display: "none" }} onClick={cancelDelete}>Cancel</button>
             <button className="confirm-delete" style={{ display: 'none', backgroundColor: 'red' }} onClick={veggieDelete} >Confirm</button>
         </div>
     )

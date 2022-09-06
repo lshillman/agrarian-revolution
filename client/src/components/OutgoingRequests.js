@@ -20,7 +20,7 @@ export default function OutgoingRequests({ sentRequests }) {
                             <p className="snippet">{request.responses.length ? request.responses[request.responses.length - 1].content : request.content}</p>
                         </div>
                         <div>
-                            <button className="respond-btn" id={request._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
+                            <button className="respond-btn button-primary" id={request._id} onClick={!auth.loggedIn() ? window.location.replace('/') : null}>
                                 <Link to={`/requests/${request._id}`}>
                                     Respond
                                 </Link>

@@ -48,6 +48,7 @@ const AddVeggieForm = () => {
     return (
         <>
             <Form id="add-veggie-form" onSubmit={handleFormSubmit}>
+                <label for="type">What kind of veggie?</label>
                 <select name='type' onChange={handleChange}>
                     <option>select one</option>
                     <option value="apples">apples</option>
@@ -93,6 +94,7 @@ const AddVeggieForm = () => {
                     <option value="tomatoes">tomatoes</option>
                     <option value="turnips">turnips</option>
                 </select>
+                <label for="quantity">How many?</label>
                 <input
                     className="form-input"
                     placeholder="quantity"
@@ -101,6 +103,7 @@ const AddVeggieForm = () => {
                     value={formState.quantity}
                     onChange={handleChange}
                 />
+                <label for="photo">Paste a link to a photo (optional)</label>
                 <input
                     className="form-input"
                     placeholder="photo"
@@ -109,8 +112,8 @@ const AddVeggieForm = () => {
                     value={formState.photo}
                     onChange={handleChange}
                 />
-
-                <input
+                <label for="description">Short description</label>
+                <textarea
                     className="form-input"
                     placeholder="description"
                     name="description"
@@ -119,7 +122,7 @@ const AddVeggieForm = () => {
                     onChange={handleChange}
                 />
                 <button
-                    className="btn btn-block btn-info"
+                    className="button-primary"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                 >

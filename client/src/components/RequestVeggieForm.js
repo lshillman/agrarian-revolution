@@ -58,7 +58,7 @@ const RequestVeggieForm = ({ veggie }) => {
                         />
 
                         <button
-                            className="btn btn-block btn-info"
+                            className="button-primary"
                             style={{ cursor: 'pointer' }}
                             type="submit"
                         >

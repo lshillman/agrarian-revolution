@@ -64,9 +64,8 @@ const LoginForm = ({setUserInfo, userInfo}) => {
             ) : (
               <>
                 {!localStorage.getItem('id_token') && localStorage.getItem('username') ? <div className='expired-message'>Your session has expired. Please log in again.</div> : ''}
-                <form onSubmit={handleFormSubmit}>
+                <form id="login-form" onSubmit={handleFormSubmit}>
                   <input
-                    className="form-input"
                     placeholder="Your email"
                     name="email"
                     type="email"
@@ -74,7 +73,6 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                     onChange={handleChange}
                   />
                   <input
-                    className="form-input"
                     placeholder="******"
                     name="password"
                     type="password"
@@ -82,7 +80,7 @@ const LoginForm = ({setUserInfo, userInfo}) => {
                     onChange={handleChange}
                   />
                   <button
-                    className="btn btn-block btn-info"
+                    className="button-primary"
                     style={{ cursor: 'pointer' }}
                     type="submit"
                   >

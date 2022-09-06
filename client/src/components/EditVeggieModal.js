@@ -12,7 +12,7 @@ export default function EditVeggieModal({veggie}) {
             {auth.loggedIn() ? (
                 <>
                     <Modal
-                        size='lg'
+                        size='md'
                         show={showEditModal}
                         onHide={() => setShowEditModal(false)}
                         aria-labelledby='veggie-modal'>
@@ -26,7 +26,7 @@ export default function EditVeggieModal({veggie}) {
 
                     </Modal>
 
-                    <Button onClick={() => setShowEditModal(true)}>
+                    <Button className="button-secondary" onClick={() => setShowEditModal(true)}>
                         Edit
                     </Button>
                 </>
