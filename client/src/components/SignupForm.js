@@ -29,26 +29,29 @@ const SignupForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        if(formState.username && formState.password
-        && formState.email && formState.location && formState.coordinates)
+        if (formState.username && formState.password
+            && formState.email && formState.street && formState.crossStreet && formState.zipcode) {
 
-        try {
-            const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
+            try {
+                const location = `${formState.street} and ${formState.crossStreet} ${formState.zipcode}`
 
-            const { data } = await createUser({
-                variables: { ...formState, location },
-            });
+                const { data } = await createUser({
+                    variables: { ...formState, location },
+                });
 
-            localStorage.setItem("_id", data.createUser.user._id);
-            localStorage.setItem("username", data.createUser.user.username);
-            localStorage.setItem("email", data.createUser.user.email);
-            localStorage.setItem("location", data.createUser.user.location);
-            localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
+                localStorage.setItem("_id", data.createUser.user._id);
+                localStorage.setItem("username", data.createUser.user.username);
+                localStorage.setItem("email", data.createUser.user.email);
+                localStorage.setItem("location", data.createUser.user.location);
+                localStorage.setItem("coordinates", JSON.stringify(data.createUser.user.coordinates));
 
 
-            Auth.login(data.createUser.token);
-        } catch (e) {
-            console.error(e);
+                Auth.login(data.createUser.token);
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+
         }
     };
 
@@ -117,6 +120,10 @@ const SignupForm = () => {
                         onChange={handleChange}
                     />
 
+                    <div className="my-3 p-3 bg-danger text-white">
+                        All fields required
+                    </div>
+
                     <button
                         className="button-primary"
                         style={{ cursor: 'pointer' }}
@@ -124,6 +131,7 @@ const SignupForm = () => {
                     >
                         Create account
                     </button>
+
                 </form>
             )}
 
