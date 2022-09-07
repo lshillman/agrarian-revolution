@@ -11,7 +11,7 @@ const VeggiesList = ({ veggies, onClickShowMarker, userUsername }) => {
         <div className="radios">
             {veggies.filter((veggie) => (veggie.owner.username !== userUsername)).map((veggie, i) => {
                 return (
-                    <>
+                    <React.Fragment key={i}>
                         <input type="radio" id={i} name="veggie-group"/>
                         <label className="radio" htmlFor={i}>
                             <div className="veggie-list-item" data-id={veggie._id} onClick={() => onClickShowMarker(i)} key={i}>
@@ -22,7 +22,7 @@ const VeggiesList = ({ veggies, onClickShowMarker, userUsername }) => {
                                 </div>
                             </div>
                         </label>
-                    </>
+                    </React.Fragment>
                 )
             })}
         </div>

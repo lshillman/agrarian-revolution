@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import auth from "../utils/auth";
-import { Navigate } from "react-router-dom";
 import EditVeggieForm from "./EditVeggieForm";
 
 export default function EditVeggieModal({veggie}) {

@@ -30,7 +30,7 @@ export default function IncomingRequests({ veggiesRequests }) {
                         ))}
                     </div>
                 }
-                return <></>
+                return <React.Fragment key={i}></React.Fragment>
             })}
         </>
     );

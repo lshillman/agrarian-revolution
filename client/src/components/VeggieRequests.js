@@ -44,37 +44,39 @@ export default function VeggiesRequests() {
 
     return (
         <main>
-            {loading ? (<div>Loading...</div>) :
-                (
-                    <>
-                        {request.map((request, i) => (
-                            <>
-                                <div className="conversation-header">
-                                    <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" className="conversation-icon" />
-                                    {(request.requestor._id === localStorage.getItem('_id')) ? <h1>You requested {request.veggie.owner.username}'s {request.veggie.type}</h1> : <h1>{request.requestor.username} requested your {request.veggie.type}</h1>}
-                                </div>
+            <div id="main-content">
+                {loading ? (<div>Loading...</div>) :
+                    (
+                        <>
+                            {request.map((request, i) => (
+                                <React.Fragment key={i}>
+                                    <div className="conversation-header">
+                                        <img src={icons[request.veggie.type].options.iconUrl} alt="veggie icon" className="conversation-icon" />
+                                        {(request.requestor._id === localStorage.getItem('_id')) ? <h1>You requested {request.veggie.owner.username}'s {request.veggie.type}</h1> : <h1>{request.requestor.username} requested your {request.veggie.type}</h1>}
+                                    </div>
 
 
-                                <div className="single-response" key={i}>
-                                    <p className="sender-meta"><strong>{(request.requestor.username === localStorage.getItem('username')) ? "You" : request.requestor.username}</strong> <span className="message-timestamp">{moment().calendar(request.timestamp)}</span></p>
-                                    <p>{request.content}</p>
-                                </div>
-                                {/* Traverse the request's array of responses */}
-                                <div>
-                                    {request.responses.map((response, i) => (
-                                        <VeggieResponses request={request} response={response} key={i} />
-                                    ))}
-                                    {auth.loggedIn() ? (
-                                        <form className="response-form" onSubmit={(e) => sendResponse(e)}>
-                                            {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
-                                            <button id="send-request-btn">Send</button>
-                                        </form>
-                                    ) : window.location.replace('/')}
-                                </div>
-                            </>
-                        ))}
-                    </>
-                )}
+                                    <div className="single-response" key={i}>
+                                        <p className="sender-meta"><strong>{(request.requestor.username === localStorage.getItem('username')) ? "You" : request.requestor.username}</strong> <span className="message-timestamp">{moment().calendar(request.timestamp)}</span></p>
+                                        <p>{request.content}</p>
+                                    </div>
+                                    {/* Traverse the request's array of responses */}
+                                    <div>
+                                        {request.responses.map((response, i) => (
+                                            <VeggieResponses request={request} response={response} key={i} />
+                                        ))}
+                                        {auth.loggedIn() ? (
+                                            <form className="response-form" onSubmit={(e) => sendResponse(e)}>
+                                                {(request.requestor._id === localStorage.getItem('_id')) ? <textarea ref={ref} placeholder={"Reply to " + request.veggie.owner.username} onChange={(e) => setResponse(e.target.value)}></textarea> : <textarea ref={ref} placeholder={"Reply to " + request.requestor.username} onChange={(e) => setResponse(e.target.value)}></textarea>}
+                                                <button id="send-request-btn">Send</button>
+                                            </form>
+                                        ) : window.location.replace('/')}
+                                    </div>
+                                </React.Fragment>
+                            ))}
+                        </>
+                    )}
+            </div>
         </main>
     )
 }

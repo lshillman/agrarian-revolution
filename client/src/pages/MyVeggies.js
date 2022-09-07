@@ -28,11 +28,12 @@ export default function MyVeggies() {
 
     return (
         <main>
+            <div id="main-content">
             {loading ? (<div>loading...</div>) : (
                 <div className="my-veggies-list">
                     <div id="top">
                         <div id="top-search">
-                            <h2>Your Veggies</h2>
+                            <h1>Your Veggies</h1>
                             <PostVeggieModal />
                         </div>
                     </div>
@@ -59,6 +60,7 @@ export default function MyVeggies() {
                     })}
                 </div>)
             }
+            </div>
         </main>)
 
 }

@@ -18,7 +18,11 @@ header {
     padding: 0 0.5rem;
 }
 
-h1, h2, h3, h4 {
+h1 {
+    font-size: 2rem;
+}
+
+h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     font-weight: bold;
@@ -141,7 +145,7 @@ button a {
     border: none;
 }
 
-main {
+#main-content {
     max-width: 1200px;
     margin: 0 auto;
     min-height: calc(100vh - 13rem);
@@ -219,6 +223,32 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+
+/* ========== LANDING PAGE ==========*/
+
+#landing-main {
+    min-height: calc(100vh - 13rem);
+}
+
+.landing-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.landing-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.landing-section p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+}
+
 
 /* ========== MY VEGGIES ==========*/
 
@@ -346,6 +376,11 @@ footer {
 #footer-content{
     max-width: 1200px;
     margin: 0 auto;
+    color: #767676;
+}
+
+#footer-content a {
+    color: #222;
 }
 
 
@@ -358,8 +393,14 @@ footer {
     gap: 2rem;
 }
 
+#signup-modal .nav-item .nav-link {
+    background-color: transparent;
+    color:#006723;
+}
+
 #signup-modal .nav-item .nav-link.active {
     background-color: transparent;
+    color:#006723;
     border-radius: 0;
     box-sizing: border-box;
     border-bottom: 5px solid #70b603;
