@@ -41,9 +41,10 @@ const Search = () => {
 
   return (
     <>
-      <main id="search-pg" >
+      <main>
+        <div id="main-content">
         <div id="top-search">
-          <h2>Veggies Near You</h2>
+          <h1>Veggies Near You</h1>
           <PostVeggieModal />
         </div>
         {loading ? (
@@ -80,6 +81,7 @@ const Search = () => {
             </div>
           </>
         )}
+        </div>
       </main>
     </>
   );

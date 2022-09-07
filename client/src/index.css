@@ -18,7 +18,11 @@ header {
     padding: 0 0.5rem;
 }
 
-h1, h2, h3, h4 {
+h1 {
+    font-size: 2rem;
+}
+
+h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-size: 1.25rem;
     font-weight: bold;
@@ -141,7 +145,7 @@ button a {
     border: none;
 }
 
-main {
+#main-content {
     max-width: 1200px;
     margin: 0 auto;
     min-height: calc(100vh - 13rem);
@@ -358,8 +362,14 @@ footer {
     gap: 2rem;
 }
 
+#signup-modal .nav-item .nav-link {
+    background-color: transparent;
+    color:#006723;
+}
+
 #signup-modal .nav-item .nav-link.active {
     background-color: transparent;
+    color:#006723;
     border-radius: 0;
     box-sizing: border-box;
     border-bottom: 5px solid #70b603;

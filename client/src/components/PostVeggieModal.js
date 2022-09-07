@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import AddVeggieForm from "./AddVeggieForm";
 import auth from "../utils/auth";
-import { Navigate } from "react-router-dom";
 
 export default function PostVeggieModal() {
     const [showPostModal, setShowPostModal] = useState(false);

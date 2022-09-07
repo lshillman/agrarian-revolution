@@ -13,7 +13,8 @@ const Landing = () => {
 
   return (
     <>
-      <main id="search-pg" >
+      <main>
+        <div id="main-content">
         <div id="top-search">
           <h2>Veggies Near You</h2>
         </div>
@@ -40,6 +41,7 @@ const Landing = () => {
             </div>
           </>
         )}
+        </div>
       </main>
     </>
   );

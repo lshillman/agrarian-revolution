@@ -16,20 +16,22 @@ export default function Requests() {
             count++;
         }
     })
-
+    console.log(count);
     return (
         <main>
-            <h1>Requests</h1>
-            {loading ? (<div>Loading...</div>) : (
-                count === 0 && sentRequests.length === 0 ? (
-                    <div>You have not made or received requests yet</div>
-                ) : (
-                    <div className="requests-list">
-                        {count > 0 ? <IncomingRequests veggiesRequests={veggiesRequests} /> : null}
-                        {sentRequests.length > 0 ? <OutgoingRequests sentRequests={sentRequests} /> : null}
-                    </div>
-                )
-            )}
+            <div id="main-content">
+                <h1>Requests</h1>
+                {loading ? (<div>Loading...</div>) : (
+                    count === 0 && sentRequests.length === 0 ? (
+                        <div>You have not made or received requests yet</div>
+                    ) : (
+                        <div className="requests-list">
+                            {count > 0 ? <IncomingRequests veggiesRequests={veggiesRequests} /> : null}
+                            {sentRequests.length > 0 ? <OutgoingRequests sentRequests={sentRequests} /> : null}
+                        </div>
+                    )
+                )}
+            </div>
         </main>
     )
 }
