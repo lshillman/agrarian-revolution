@@ -224,6 +224,32 @@ button a {
     flex-direction: column;
 }
 
+
+/* ========== LANDING PAGE ==========*/
+
+#landing-main {
+    min-height: calc(100vh - 13rem);
+}
+
+.landing-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.landing-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.landing-section p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+}
+
+
 /* ========== MY VEGGIES ==========*/
 
 .my-veggies-list {
@@ -350,6 +376,11 @@ footer {
 #footer-content{
     max-width: 1200px;
     margin: 0 auto;
+    color: #767676;
+}
+
+#footer-content a {
+    color: #222;
 }
 
 

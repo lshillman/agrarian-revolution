@@ -13,19 +13,18 @@ const Landing = () => {
 
   return (
     <>
-      <main>
-        <div id="main-content">
-        <div id="top-search">
-          <h2>Veggies Near You</h2>
+      <main id="landing-main">
+        <div className="landing-section">
+          <h1>Join the agrarian revolution</h1>
+          <p>Meet your new neighborhood crop swap. Agrarify helps gardening enthusiasts share their surplus, and helps everyone get some fresh, seasonal, hyper-local veggies — all for free. Sign up now to get started.</p>
         </div>
         {loading ? (
           <div>Loading...</div>
         ) : (
           <>
-            <div id="map-veg" style={{ maxWidth: "1200px" }}>
 
-              <div style={{ flexBasis: "100%" }}>
-                <MapContainer center={userCoords || [37.87114171034828, -122.27379801035863]} zoom={13} style={{ height: "500px" }}>
+              <div style={{ width: "100%" }}>
+                <MapContainer center={userCoords || [37.87114171034828, -122.27379801035863]} zoom={13} style={{ height: "600px" }}>
                   <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -38,10 +37,8 @@ const Landing = () => {
                   })}
                 </MapContainer>
               </div>
-            </div>
           </>
         )}
-        </div>
       </main>
     </>
   );
