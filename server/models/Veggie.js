@@ -1,49 +1,66 @@
-const { Schema, model } = require('mongoose');
-const User = require('./User');
-const Request = require('./Request');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-const veggieSchema = new Schema ({
-    type: {
-        type: String,
-        required: true
-    },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    postedDate: {
-        type: Date,
-        default: Date.now(),
-        expires: 604800
-        // default: new Date()
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    coordinates: {
-        type: [Number]
-    },
-    photo: {
-        type: String
-    },
-    quantity: {
-        type: Number,
-        require: true,
-        default: 1
-    },
-    description: {
-        type: String,
-        maxLength: 280
-    },
-    requests: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Request'
+class Veggie extends Model {}
+
+Veggie.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+        },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        owner_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: { model: 'user', key: 'id' },
+        },
+        postedDate: {
+            type: DataTypes.DATE,
+            defaultValue: Date.now(),
+            allowNull: false,
+        },
+        location: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        coordinates: {
+            type: [DataTypes.FLOAT],
+            allowNull: true,
+        },
+        photo: {
+            type: DataTypes.STRING,
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 1,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: { len: [1, 280] }
+        },
+        requests: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'request',
+                key: 'id',
+            },
         }
-    ]
-});
-
-const Veggie = model('Veggie', veggieSchema)
+    },
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'veggie',
+    }
+);
 
 module.exports = Veggie;
