@@ -1,6 +1,6 @@
 const User = require('./User');
 const Veggie = require('./Veggie');
-const Request = require('./Request');
+const {Request, Message} = require('./Request');
 
 User.hasMany(Veggie, {
     foreignKey: 'user_id',
@@ -38,6 +38,8 @@ Request.belongsTo(User, {
     foreignKey: 'owner_id'
 });
 
-
+Request.hasMany(Message, {
+    foreignKey: 'message_id'
+})
 
 module.exports = { User, Veggie, Request };

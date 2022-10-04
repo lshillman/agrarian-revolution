@@ -83,4 +83,4 @@ Request.init(
     }
 );
 
-module.exports = Request;
+module.exports = {Request, Message};
