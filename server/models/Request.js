@@ -10,6 +10,10 @@ Message.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        request_id: {
+            type: DataTypes.INTEGER,
+            references: { model: 'request', key: 'id' }
+        },
         content: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -68,11 +72,18 @@ Request.init(
             type: DataTypes.DATE,
             default: Date.now()
         },
-        messages: {
-            type: [DataTypes.INTEGER],
-            allowNull: false,
-            references: { model: 'message', key: 'id' },
+        snippet: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
+        isOpen: {
+            type: DataTypes.BOOLEAN,
+            default: true
+        },
+        veggie_exp: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
     },
     {
         sequelize,
