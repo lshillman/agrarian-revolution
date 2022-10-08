@@ -8,6 +8,7 @@ router.get('/:id', async (req, res) => {
             res.status(404).json({message: "No veggies found"});
             return;
         }
+        // not sure if I need to clean the veggie; had done this for a previous project using handlebars res.render. Feel free to remove if not necessary
         const cleanVeggie = dbVeggieData.get({plain: true});
         res.json(cleanVeggie);
     } catch(err) {
